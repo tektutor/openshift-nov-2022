@@ -89,6 +89,7 @@
 - this was within Google for many year before it was made an open-source, hence it is time-test robust platform
 - works a cluster of nodes
 - node could be a Virtual Machine/Physical Server/Cloud virtual machine
+- aka k8s
 - there are two types of nodes
   1. Master node
   2. Worker node
@@ -104,8 +105,45 @@
   - Scheduler
   - etcd key/value data store
   - Controller Managers
+
+##### API Server
+- supports Kubernetes functionalities as REST APIs
+- this is core component of Kubernetes 
+- this component stores the Cluster and application state in the etcd key-value data-store
+- etcd is accessed only by API Server
+- API server triggers events whenever something is created, updated or deleted in etcd database
+- every K8s components only talks to API Server
+
+##### etcd
+- key/value datastore used by API Server
+- this stores the cluster and application state
+
+##### Scheduler
+- this is the component which identifies a healthy node where new Pods(application) can be deployed
+- Scheduler shares the scheduling recommendations to API Server via REST call
+
+##### Controller Managers
+- is a combination of many Controllers
+- For example
+  - Deployment Controller to manage Deployment
+  - ReplicaSet Controller to manage ReplicaSets
+  - Job Controller to manage Jobs
+  - EndPoint Controller to manage service Pod endpoints
+  - DaemonSet Controller to manage DaemonSet
+ 
+## What is a Kubernetes Controller ?
+- each controller monitors and manages a specific type of Kubernetes Resource/Object
+- Deployment Controller manages Deployment 
+  - Deployment Controller keeps watching for the below events
+    - when new Deployment is created
+    - When existing Deployment is updated
+    - When existing Deployment is deleted
+    - when deployments are scaled up/down
+    - when deployment - rolling update happens
+    - when deployment - roll back happens
  
 #### Kubernetes Worker Node
+- is where user containerized applications are deployed and runs
 
 ## Kubernetes High-Level Architecture
 
