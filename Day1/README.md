@@ -55,6 +55,24 @@
   - Podman
 
 ## What is Container Orchestration Platform ?
+- helps in managing containerized applications
+
+- Examples of Orchestration Platforms
+  - Docker SWARM - supports only native Docker containerized applications
+  - Kubernetes - it supports many container runtimes that supports CRI (Container Runtime Interface)
+  - Red Hat OpenShift - Red Hat's Distribution of Kubernetes
+
+- AWS Kubernetes Service ( EKS - Managed Service )
+  - Azure Kubernetes Service ( AKS - Managed Service )
+  - AWS ROSA ( RedHat OpenShift - Managed service )
+  - Azure ARO ( Azure Red Hat OpenShift - Managed Service )
+- Examples of Containerized Applications
+  - Microservices are containerized application
+  - REST/SOAP APIs can be containerized
+  - DB Servers like mysql, oracle, mongo db, cassandra, couchbase, redis can be containerized
+  - Web Server can be containerized
+  - Application Servers can be containerized
+
 
 ## What is Kubernetes ?
 
