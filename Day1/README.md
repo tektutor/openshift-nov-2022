@@ -56,7 +56,17 @@
 
 ## What is Container Orchestration Platform ?
 - helps in managing containerized applications
-
+- major features supported by Container Orchestration Platforms
+  - manage containerized applications
+  - application monitoring and self-heling
+  - scale up/down on demand
+  - rolling update
+    - upgrading your live application from one version to other without any downtime
+  - application connectivity using Service(Service Discovery)
+  - security
+  - High Availability (HA)
+  - access management
+  
 - Examples of Orchestration Platforms
   - Docker SWARM - supports only native Docker containerized applications
   - Kubernetes - it supports many container runtimes that supports CRI (Container Runtime Interface)
@@ -73,8 +83,29 @@
   - Web Server can be containerized
   - Application Servers can be containerized
 
-
 ## What is Kubernetes ?
+- is a Container Orchestration Platform developed by Google as open source project in Go programming language
+- is a production-grade orchestration platform 
+- this was within Google for many year before it was made an open-source, hence it is time-test robust platform
+- works a cluster of nodes
+- node could be a Virtual Machine/Physical Server/Cloud virtual machine
+- there are two types of nodes
+  1. Master node
+  2. Worker node
+- supports extending Kubernetes API by adding your own custom operators
+- Operators
+  - is a combination of CRDs(Custom Resource Defintion) and Customer Controllers
+  
+#### Kubernetes Master Node
+- Control Plane
+  - set of components that only runs on a Master Node
+  - these components supports the Kubernetes Orchestration Functionalities
+  - API Server
+  - Scheduler
+  - etcd key/value data store
+  - Controller Managers
+ 
+#### Kubernetes Worker Node
 
 ## Kubernetes High-Level Architecture
 
