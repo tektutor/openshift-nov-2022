@@ -145,6 +145,32 @@
 #### Kubernetes Worker Node
 - is where user containerized applications are deployed and runs
 
+## Commonly used Kuberentes Resources/Objects
+1. Pod ( Resource Definitions stored in etcd )
+   - a group of related containers
+   - each Pod represents one application
+   - though a Pod can have multiple containers, recommended best practice says one main application per Pod
+   - all the containers in a Pod they share the network( network stack, IP Address, ports, etc .,)
+   - managed by ReplicaSet Controller
+2. ReplicaSet ( Resource Definition stored in etcd )
+   - Application Pods that belongs to specific Deployment are managed by a ReplicaSet
+   - each ReplicaSet manages one or more Pods
+   - supports scaling up/down your Pod instances
+   - is created by Deploymenent Controller
+   - managed by ReplicaSet Controller
+3. Deployment ( Resource definition stored in etcd )
+   - this is how deploy our applications into the Kubernetes cluster
+   - each Deployment has one or more ReplicaSet
+   - supports rolling update when you wish to upgrade your live applications from one version to other version
+   - supports rolling back when you wish to go back to older version of your application in case of some issue in latest version
+   - is Managed by Deployment Controller
+
+## What is Custom Resource Defintion (CRD) ?
+- You can add your own type of Kubernetes resources/objects into the Kubernetes Cluster
+- This is one could extend the Kubernetes features(api)
+- To manage your Custom Resource(CR) you need to develop/deploy a Custom Controller
+- Combination of one or more Custom Resource Defintions(CRDs) and Custom Controller is called an Operator
+
 ## Kubernetes High-Level Architecture
 
 ## What is OpenShift ?
