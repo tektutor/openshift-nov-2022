@@ -171,9 +171,16 @@
 - To manage your Custom Resource(CR) you need to develop/deploy a Custom Controller
 - Combination of one or more Custom Resource Defintions(CRDs) and Custom Controller is called an Operator
 
+## What is Kubernetes Operators
+- is a comibination of many CRDs + Custom Controllers
+
 ## Kubernetes High-Level Architecture
 
 ## What is OpenShift ?
+- OpenShift is RedHat's distribution of Kubernetes
+- Openshift is developed on top of Kubernetes with many additional features
+- OpenShift added many additional features using the Kubernetes Operators
+- Openshift => Kubernetes + Many Custom Kubernetes Operators
 
 ## OpenShift High-Level Architecture
 
