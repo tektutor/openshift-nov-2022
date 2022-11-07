@@ -3,7 +3,7 @@
 ### For training/consulting requirements
 Please feel free to reach me out
 <pre>
-jegan@tektutor.org
+<b>jegan@tektutor.org</b>
 Freelance Software Consultant
 +91 822-000-5626
 </pre>
