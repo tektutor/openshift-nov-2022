@@ -184,4 +184,15 @@
 
 ## OpenShift High-Level Architecture
 
-
+- Master Node
+  - RedHat OpenShift supports only Red Hat Enterprise Core OS as the Operating System
+- Worker Node
+  - RedHat OpenShift supports either Red Hat Enterprise Linux(RHEL) or Red Hat Enterprise Core OS as the Operating System
+- Best Practice - use Red Hat Enterprise Core OS for both master and worker nodes
+- If Red Hat Enterprise Core OS is used it is easy to upgrade the use using openshift commands
+- Red Hat Enterprise Core OS is an OS optimized for Container Orchestration Platform like OpenShift
+- Red Hat Enterprise Core OS comes with pre-installed CRI-O Container Runtime and Podman Container Engine
+- Red Hat Enterprise Core OS enforces many Best Practices 
+   - running application as root isn't recommended, normally won't work
+   - use ports below 1000 are prohibited 
+- Openshift enforces deploying application within a project(is nothing but namespace)
