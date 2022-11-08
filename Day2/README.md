@@ -118,6 +118,24 @@ kube-public       Active   11m
 kube-system       Active   11m
 </pre>
 
+## Lab - Finding the private openshift image registry
+```
+oc get pods --all-namespaces | grep -i image
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get pods --all-namespaces | grep -i image</b>
+openshift-image-registry                           cluster-image-registry-operator-77b89758cf-gqw4c             1/1     Running     0             27h
+openshift-image-registry                           image-pruner-27797760-r68zw                                  0/1     Completed   0             6h24m
+<b>openshift-image-registry                           image-registry-f884c66b8-htchr                               1/1     Running     0             27h</b>
+openshift-image-registry                           node-ca-2jq7q                                                1/1     Running     0             27h
+openshift-image-registry                           node-ca-58mzf                                                1/1     Running     0             27h
+openshift-image-registry                           node-ca-58ntb                                                1/1     Running     0             27h
+openshift-image-registry                           node-ca-b6249                                                1/1     Running     0             27h
+openshift-image-registry                           node-ca-qgn98                                                1/1     Running     0             27h
+</pre>
+
 ## Lab - Finding more details about your master node
 ```
 oc describe node master-1.ocp.tektutor.org
