@@ -1,7 +1,7 @@
 # Day 1 ( 4 Hours )
 
 ## What is Hypervisor ?
-- is a general reffered to the Virtualization Technology
+- is a technical term that reffs to the Virtualization Technology
 - allows running many Operating Systems side by side on the same Desktop/Laptop/Workstation/Server
 - many OS can actively run on the same machine
 - Processors
@@ -16,12 +16,16 @@
   Each VM(Guest OS) are allocated with dedicated 
     - Hardware resources ( CPU, RAM and Hard Disk[Storage] )
 
+## Hypervisor High Level Architecture
+![Hypervisor Architecture](HypervisorHighLevelArchitecture.png)
+
 ## What are Containers ?
 - this is an application virtualization technology
 - lightweight virtualization technology
 - based on Linux Kernel Feature
   1. Namespace - used to isolate one container from other container
   2. Control Group (CGroups) - used to apply resource quota restrictions on a container-level
+- each containers runs one application
 
 ## How Containers are different from Virtual Machines ?
 - Virtual Machines are aka Guest OS
@@ -54,9 +58,12 @@
   - Docker
   - Podman
 
+## Docker High Level Architecture 
+![Docker Architecture](DockerHighLevelArchitecture.png)
+
 ## What is Container Orchestration Platform ?
 - helps in managing containerized applications
-- major features supported by Container Orchestration Platforms
+- main features supported by Container Orchestration Platforms
   - manage containerized applications
   - application monitoring and self-heling
   - scale up/down on demand
@@ -106,7 +113,10 @@
   - etcd key/value data store
   - Controller Managers
 
-##### API Server
+#### Kubernetes Worker Node
+- is where user containerized applications are deployed and runs
+
+#### API Server
 - supports Kubernetes functionalities as REST APIs
 - this is core component of Kubernetes 
 - this component stores the Cluster and application state in the etcd key-value data-store
@@ -114,15 +124,15 @@
 - API server triggers events whenever something is created, updated or deleted in etcd database
 - every K8s components only talks to API Server
 
-##### etcd
+#### etcd
 - key/value datastore used by API Server
 - this stores the cluster and application state
 
-##### Scheduler
+#### Scheduler
 - this is the component which identifies a healthy node where new Pods(application) can be deployed
 - Scheduler shares the scheduling recommendations to API Server via REST call
 
-##### Controller Managers
+#### Controller Managers
 - is a combination of many Controllers
 - For example
   - Deployment Controller to manage Deployment
@@ -131,7 +141,7 @@
   - EndPoint Controller to manage service Pod endpoints
   - DaemonSet Controller to manage DaemonSet
  
-## What is a Kubernetes Controller ?
+#### What is a Kubernetes Controller ?
 - each controller monitors and manages a specific type of Kubernetes Resource/Object
 - Deployment Controller manages Deployment 
   - Deployment Controller keeps watching for the below events
@@ -142,9 +152,6 @@
     - when deployment - rolling update happens
     - when deployment - roll back happens
  
-#### Kubernetes Worker Node
-- is where user containerized applications are deployed and runs
-
 ## Commonly used Kuberentes Resources/Objects
 1. Pod ( Resource Definitions stored in etcd )
    - a group of related containers
@@ -175,6 +182,9 @@
 - is a comibination of many CRDs + Custom Controllers
 
 ## Kubernetes High-Level Architecture
+![Kubernetes Architecture](KubernetesArchitecture1.png)
+![Kubernetes Architecture](KubernetesArchitecture.png)
+
 
 ## What is OpenShift ?
 - OpenShift is RedHat's distribution of Kubernetes
@@ -183,6 +193,7 @@
 - Openshift => Kubernetes + Many Custom Kubernetes Operators
 
 ## OpenShift High-Level Architecture
+![OpenShift Architecture](OpenShiftArchitecture.png)
 
 - Master Node
   - RedHat OpenShift supports only Red Hat Enterprise Core OS as the Operating System
@@ -196,3 +207,5 @@
    - running application as root isn't recommended, normally won't work
    - use ports below 1000 are prohibited 
 - Openshift enforces deploying application within a project(is nothing but namespace)
+
+![OpenShift Master Node](master-node.png)
