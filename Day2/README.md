@@ -1,6 +1,6 @@
 # Day 2 ( 4 Hours )
 
-## Lab - Listing OpenShift nodes in the cluster
+## ⛹️‍♂️ Lab - Listing OpenShift nodes in the cluster
 ```
 oc get nodes
 ```
@@ -28,7 +28,7 @@ minikube   Ready    control-plane   3m8s   v1.25.3
 </pre>
 
 
-## Lab - Listing the projects
+## ⛹️‍♂️ Lab - Listing the projects
 ```
 oc get projects
 ```
@@ -118,7 +118,7 @@ kube-public       Active   11m
 kube-system       Active   11m
 </pre>
 
-## Lab - Finding the private openshift image registry
+## ⛹️‍♂️ Lab - Finding the private openshift image registry
 ```
 oc get pods --all-namespaces | grep -i image
 ```
@@ -136,7 +136,7 @@ openshift-image-registry                           node-ca-b6249                
 openshift-image-registry                           node-ca-qgn98                                                1/1     Running     0             27h
 </pre>
 
-## Lab - Finding more details about your master node
+## ⛹️‍♂️ Lab - Finding more details about your master node
 ```
 oc describe node master-1.ocp.tektutor.org
 ```
@@ -300,7 +300,7 @@ kube-proxy-vhnw2                   1/1     Running   0          3m7s
 storage-provisioner                1/1     Running   0          3m15s
 </pre>
 
-## Lab - Listing Control Plane components in OpenShift
+## ⛹️‍♂️ Lab - Listing Control Plane components in OpenShift
 ```
 oc get pods -n openshift-apiserver
 oc get pods -n openshift-etcd
@@ -389,7 +389,7 @@ revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0
 revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h
 </pre>
 
-## Lab - Finding the nodes where a pod runs
+## ⛹️‍♂️ Lab - Finding the nodes where a pod runs
 ```
 oc get pods -n openshift-kube-scheduler -o wide
 ```
@@ -420,7 +420,7 @@ revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0
 revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h   10.130.0.40       master-3.ocp.tektutor.org   <none>           <none>
 </pre>
 
-## Lab - Finding OS and Container Runtime installed in each of the OpenShift nodes
+## ⛹️‍♂️ Lab - Finding OS and Container Runtime installed in each of the OpenShift nodes
 ```
 oc get nodes -o wide
 ```
@@ -448,7 +448,7 @@ NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP  
 minikube   Ready    control-plane   34m   v1.25.3   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.20
 </pre>
 
-## Lab - Creating a project in OpenShift
+## ⛹️‍♂️ Lab - Creating a project in OpenShift
 ```
 oc new-project jegan
 ```
@@ -478,7 +478,7 @@ Expected output
 Using project "jegan" on server "https://api.ocp.tektutor.org:6443".
 </pre>
 
-## Lab - Switching to a project
+## ⛹️‍♂️ Lab - Switching to a project
 ```
 oc project default
 ```
