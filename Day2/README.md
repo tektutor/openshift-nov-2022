@@ -429,3 +429,22 @@ jegan@worker1.tektutor.org:~/Desktop$ <b>kubectl get nodes -o wide</b>
 NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
 minikube   Ready    control-plane   34m   v1.25.3   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.20
 </pre>
+
+## Lab - Creating a project in OpenShift
+```
+oc new-project jegan
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc new-project jegan</b>
+Now using project "jegan" on server "https://api.ocp.tektutor.org:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
+</pre>
