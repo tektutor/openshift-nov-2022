@@ -104,6 +104,20 @@ openshift-user-workload-monitoring                                Active
 openshift-vsphere-infra                                           Active
 </pre>
 
+## Demo - Listing the namespaces ( project concept isn't supported in Kubernetes )
+```
+kubectl get namespaces
+```
+Expected output
+<pre>
+jegan@worker1.tektutor.org:~/Desktop$ <b>kubectl get namespaces</b>
+NAME              STATUS   AGE
+default           Active   11m
+kube-node-lease   Active   11m
+kube-public       Active   11m
+kube-system       Active   11m
+</pre>
+
 ## Lab - Finding more details about your master node
 ```
 oc describe node master-1.ocp.tektutor.org
