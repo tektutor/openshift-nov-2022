@@ -594,7 +594,7 @@ nginx-7c658794b9-7cnjh   0/1     CrashLoopBackOff   10 (119s ago)   29m
 nginx-7c658794b9-w5pj5   0/1     CrashLoopBackOff   10 (108s ago)   29m
 </pre>
 
-## Let's delete the deployment and redeploy nginx using bitnami/nginx docker image
+## ⛹️‍♂️ Lab - Let's delete the deployment and redeploy nginx using bitnami/nginx docker image
 
 Let's delete the existing nginx deployment
 ```
@@ -637,13 +637,13 @@ oc get rs
 ```
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc get replicasets
+(jegan@tektutor.org)$ <b>oc get replicasets</b>
 NAME               DESIRED   CURRENT   READY   AGE
 nginx-78644964b4   3         3         3       8s
-(jegan@tektutor.org)$ oc get replicaset
+(jegan@tektutor.org)$ <b>oc get replicaset</b>
 NAME               DESIRED   CURRENT   READY   AGE
 nginx-78644964b4   3         3         3       13s
-(jegan@tektutor.org)$ oc get rs
+(jegan@tektutor.org)$ <b>oc get rs</b>
 NAME               DESIRED   CURRENT   READY   AGE
 nginx-78644964b4   3         3         3       16s
 </pre>
@@ -655,7 +655,7 @@ oc get po -w
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc get po
+(jegan@tektutor.org)$ <b>oc get po</b>
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-78644964b4-9sms6   1/1     Running   0          22s
 nginx-78644964b4-bv7n5   1/1     Running   0          22s
@@ -666,11 +666,9 @@ Checking nginx pod logs
 ```
 oc logs nginx-78644964b4-hqtdx
 ```
-
-
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc logs nginx-78644964b4-hqtdx
+(jegan@tektutor.org)$ <b>oc logs nginx-78644964b4-hqtdx</b>
 nginx 06:36:37.44 
 nginx 06:36:37.44 Welcome to the Bitnami nginx container
 nginx 06:36:37.45 Subscribe to project updates by watching https://github.com/bitnami/containers
