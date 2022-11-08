@@ -215,4 +215,4 @@
 - Containers within the same Pod shares Network and IP address
 - Unlike Docker, Kubernetes assigns IP address on the Pod level
 
-![Pod](Pod.png)
+![Pod](PodUpdated.png)
