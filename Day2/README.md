@@ -281,3 +281,92 @@ kube-proxy-vhnw2                   1/1     Running   0          3m7s
 <b>kube-scheduler-minikube            1/1     Running   0          3m18s</b>
 storage-provisioner                1/1     Running   0          3m15s
 </pre>
+
+## Lab - Listing Control Plane components in OpenShift
+```
+oc get pods -n openshift-apiserver
+oc get pods -n openshift-etcd
+oc get pods -n openshift-kube-controller-manager
+oc get pods -n openshift-kube-scheduler
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get pods -n openshift-apiserver</b>
+NAME                         READY   STATUS    RESTARTS   AGE
+apiserver-6db64c8c9c-kbc75   2/2     Running   0          26h
+apiserver-6db64c8c9c-m5lnt   2/2     Running   0          26h
+apiserver-6db64c8c9c-wh8jx   2/2     Running   0          26h
+(jegan@tektutor.org)$ <b>oc get pods -n openshift-etcd</b>
+NAME                                          READY   STATUS      RESTARTS   AGE
+<b>etcd-master-1.ocp.tektutor.org                5/5     Running     0          26h
+etcd-master-2.ocp.tektutor.org                5/5     Running     0          26h
+etcd-master-3.ocp.tektutor.org                5/5     Running     0          26h</b>
+etcd-quorum-guard-78f4445675-bpmbm            1/1     Running     0          26h
+etcd-quorum-guard-78f4445675-dzjqk            1/1     Running     0          26h
+etcd-quorum-guard-78f4445675-hwms8            1/1     Running     0          26h
+installer-5-master-1.ocp.tektutor.org         0/1     Completed   0          26h
+installer-5-master-3.ocp.tektutor.org         0/1     Completed   0          26h
+installer-7-master-1.ocp.tektutor.org         0/1     Completed   0          26h
+installer-7-master-2.ocp.tektutor.org         0/1     Completed   0          26h
+installer-7-master-3.ocp.tektutor.org         0/1     Completed   0          26h
+installer-8-master-1.ocp.tektutor.org         0/1     Completed   0          26h
+installer-8-master-2.ocp.tektutor.org         0/1     Completed   0          26h
+installer-8-master-3.ocp.tektutor.org         0/1     Completed   0          26h
+revision-pruner-7-master-1.ocp.tektutor.org   0/1     Completed   0          26h
+revision-pruner-7-master-2.ocp.tektutor.org   0/1     Completed   0          26h
+revision-pruner-7-master-3.ocp.tektutor.org   0/1     Completed   0          26h
+revision-pruner-8-master-1.ocp.tektutor.org   0/1     Completed   0          26h
+revision-pruner-8-master-2.ocp.tektutor.org   0/1     Completed   0          26h
+revision-pruner-8-master-3.ocp.tektutor.org   0/1     Completed   0          26h
+(jegan@tektutor.org)$ <b>oc get pods -n openshift-kube-controller-manager</b>
+NAME                                                      READY   STATUS      RESTARTS      AGE
+installer-7-master-1.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-7-master-2.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-7-master-3.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-8-master-1.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-8-master-2.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-9-master-1.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-9-master-2.ocp.tektutor.org                     0/1     Completed   0             26h
+installer-9-master-3.ocp.tektutor.org                     0/1     Completed   0             26h
+<b>kube-controller-manager-guard-master-1.ocp.tektutor.org   1/1     Running     0             26h
+kube-controller-manager-guard-master-2.ocp.tektutor.org   1/1     Running     0             26h
+kube-controller-manager-guard-master-3.ocp.tektutor.org   1/1     Running     0             26h</b>
+kube-controller-manager-master-1.ocp.tektutor.org         4/4     Running     0             26h
+kube-controller-manager-master-2.ocp.tektutor.org         4/4     Running     0             26h
+kube-controller-manager-master-3.ocp.tektutor.org         4/4     Running     1 (26h ago)   26h
+revision-pruner-6-master-1.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-6-master-2.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-6-master-3.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-7-master-1.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-7-master-2.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-7-master-3.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-8-master-1.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-8-master-2.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-8-master-3.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-9-master-1.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-9-master-2.ocp.tektutor.org               0/1     Completed   0             26h
+revision-pruner-9-master-3.ocp.tektutor.org               0/1     Completed   0             26h
+(jegan@tektutor.org)$ <b>oc get pods -n openshift-kube-scheduler</b>
+NAME                                                       READY   STATUS      RESTARTS   AGE
+installer-7-master-1.ocp.tektutor.org                      0/1     Completed   0          26h
+installer-7-master-2.ocp.tektutor.org                      0/1     Completed   0          26h
+installer-8-master-1.ocp.tektutor.org                      0/1     Completed   0          26h
+installer-8-master-2.ocp.tektutor.org                      0/1     Completed   0          26h
+installer-8-master-3.ocp.tektutor.org                      0/1     Completed   0          26h
+openshift-kube-scheduler-guard-master-1.ocp.tektutor.org   1/1     Running     0          26h
+openshift-kube-scheduler-guard-master-2.ocp.tektutor.org   1/1     Running     0          26h
+openshift-kube-scheduler-guard-master-3.ocp.tektutor.org   1/1     Running     0          26h
+<b>openshift-kube-scheduler-master-1.ocp.tektutor.org         3/3     Running     0          26h
+openshift-kube-scheduler-master-2.ocp.tektutor.org         3/3     Running     0          26h
+openshift-kube-scheduler-master-3.ocp.tektutor.org         3/3     Running     0          26h</b>
+revision-pruner-6-master-1.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-6-master-2.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-6-master-3.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-7-master-1.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-7-master-2.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-7-master-3.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-8-master-1.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0          26h
+revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h
+</pre>
