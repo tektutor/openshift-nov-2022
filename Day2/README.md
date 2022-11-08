@@ -460,6 +460,16 @@ Expected output
 Using project "jegan" on server "https://api.ocp.tektutor.org:6443".
 </pre>
 
+## Lab - Switching to a project
+```
+oc project default
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc project default</b>
+Now using project "default" on server "https://api.ocp.tektutor.org:6443".
+</pre>
 
 ## Lab - Deleting a project in OpenShift
 Deleting a project will delete everything that is created within the project.
@@ -472,3 +482,5 @@ Expected output
 (jegan@tektutor.org)$ <b>oc delete project jegan</b>
 project.project.openshift.io "jegan" deleted
 </pre>
+
+
