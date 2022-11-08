@@ -183,7 +183,7 @@
 
 ## Kubernetes High-Level Architecture
 ![Kubernetes Architecture](KubernetesArchitecture1.png)
-![Kubernetes Architecture](KubernetesArchitecture.png)
+![Kubernetes Architecture](KubernetesArchitecture2.png)
 
 
 ## What is OpenShift ?
