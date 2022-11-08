@@ -209,3 +209,10 @@
    - use ports below 1000 are prohibited 
 - Openshift enforces deploying application within a project(is nothing but namespace)
 
+## Pod
+- is the smallest unit that can be deployed into the Kubernetes/OpenShift cluster
+- Pod is a logical group of related containers
+- Containers within the same Pod shares Network and IP address
+- Unlike Docker, Kubernetes assigns IP address on the Pod level
+
+![Pod](Pod.png)
