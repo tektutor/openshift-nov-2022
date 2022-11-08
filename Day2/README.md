@@ -592,6 +592,96 @@ NAME                     READY   STATUS             RESTARTS        AGE
 nginx-7c658794b9-6q96h   0/1     CrashLoopBackOff   10 (116s ago)   29m
 nginx-7c658794b9-7cnjh   0/1     CrashLoopBackOff   10 (119s ago)   29m
 nginx-7c658794b9-w5pj5   0/1     CrashLoopBackOff   10 (108s ago)   29m
-^C(jegan@tektutor.org)$ oc delete deploy nginx
+</pre>
+
+## Let's delete the deployment and redeploy nginx using bitnami/nginx docker image
+
+Let's delete the existing nginx deployment
+```
+oc delete deploy nginx
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc delete deploy nginx</b>
 deployment.apps "nginx" deleted
+</pre>
+
+Let's deploy nginx using bitnami/nginx docker image that follows the OpenShift Container Image best practices
+```
+oc create deployment nginx --image=bitnami/nginx:latest --replicas=3
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc create deployment nginx --image=bitnami/nginx:latest --replicas=3</b>
+deployment.apps/nginx created
+</pre>
+
+
+Let's list the deployments
+```
+oc get deploy
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get deploy</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           3s
+</pre>
+
+Let's list the replicasets
+```
+oc get replicasets
+oc get replicaset
+oc get rs
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get replicasets
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-78644964b4   3         3         3       8s
+(jegan@tektutor.org)$ oc get replicaset
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-78644964b4   3         3         3       13s
+(jegan@tektutor.org)$ oc get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-78644964b4   3         3         3       16s
+</pre>
+
+Let's list the pods
+```
+oc get po -w
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get po
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-78644964b4-9sms6   1/1     Running   0          22s
+nginx-78644964b4-bv7n5   1/1     Running   0          22s
+nginx-78644964b4-hqtdx   1/1     Running   0          22s
+</pre>
+
+Checking nginx pod logs
+```
+oc logs nginx-78644964b4-hqtdx
+```
+
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc logs nginx-78644964b4-hqtdx
+nginx 06:36:37.44 
+nginx 06:36:37.44 Welcome to the Bitnami nginx container
+nginx 06:36:37.45 Subscribe to project updates by watching https://github.com/bitnami/containers
+nginx 06:36:37.45 Submit issues and feature requests at https://github.com/bitnami/containers/issues
+nginx 06:36:37.45 
+nginx 06:36:37.46 INFO  ==> ** Starting NGINX setup **
+nginx 06:36:37.48 INFO  ==> Validating settings in NGINX_* env vars
+nginx 06:36:37.50 INFO  ==> No custom scripts in /docker-entrypoint-initdb.d
+nginx 06:36:37.51 INFO  ==> Initializing NGINX
+realpath: /bitnami/nginx/conf/vhosts: No such file or directory
+nginx 06:36:37.57 INFO  ==> ** NGINX setup finished! **
+
+nginx 06:36:37.59 INFO  ==> ** Starting NGINX **
 </pre>
