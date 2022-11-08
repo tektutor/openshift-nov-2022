@@ -484,3 +484,46 @@ project.project.openshift.io "jegan" deleted
 </pre>
 
 
+## Lab - Deploying your first application within RedHat OpenShift cluster
+```
+oc project jegan
+oc create deployment nginx --image=bitnami/nginx:latest --replicas=3
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc create deployment nginx --image=nginx:latest --replicas=3 </b>
+deployment.apps/nginx created
+</pre>
+
+Listing the deployments
+```
+oc get deployments
+oc get deployment
+oc get deploy
+kubectl get deployments
+kubectl get deployment
+kubectl get deploy
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get deployments</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           13s
+(jegan@tektutor.org)$ <b>oc get deployment</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           19s
+(jegan@tektutor.org)$ <b>oc get deploy</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           23s
+(jegan@tektutor.org)$ <b>kubectl get deployments</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           35s
+(jegan@tektutor.org)$ <b>kubectl get deployment</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           39s
+(jegan@tektutor.org)$ <b>kubectl get deploy</b>
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     3            0           43s
+</pre>
