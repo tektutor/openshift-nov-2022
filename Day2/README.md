@@ -370,3 +370,50 @@ revision-pruner-8-master-1.ocp.tektutor.org                0/1     Completed   0
 revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0          26h
 revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h
 </pre>
+
+## Finding the nodes where a pod runs
+```
+oc get pods -n openshift-kube-scheduler -o wide
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get pods -n openshift-kube-scheduler -o wide</b>
+NAME                                                       READY   STATUS      RESTARTS   AGE   IP                NODE                        NOMINATED NODE   READINESS GATES
+installer-7-master-1.ocp.tektutor.org                      0/1     Completed   0          26h   10.129.0.54       master-1.ocp.tektutor.org   <none>           <none>
+installer-7-master-2.ocp.tektutor.org                      0/1     Completed   0          26h   10.128.0.20       master-2.ocp.tektutor.org   <none>           <none>
+installer-8-master-1.ocp.tektutor.org                      0/1     Completed   0          26h   10.129.0.76       master-1.ocp.tektutor.org   <none>           <none>
+installer-8-master-2.ocp.tektutor.org                      0/1     Completed   0          26h   10.128.0.43       master-2.ocp.tektutor.org   <none>           <none>
+installer-8-master-3.ocp.tektutor.org                      0/1     Completed   0          26h   10.130.0.39       master-3.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-guard-master-1.ocp.tektutor.org   1/1     Running     0          26h   10.129.0.56       master-1.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-guard-master-2.ocp.tektutor.org   1/1     Running     0          26h   10.128.0.15       master-2.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-guard-master-3.ocp.tektutor.org   1/1     Running     0          26h   10.130.0.44       master-3.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-master-1.ocp.tektutor.org         3/3     Running     0          26h   192.168.122.39    master-1.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-master-2.ocp.tektutor.org         3/3     Running     0          26h   192.168.122.184   master-2.ocp.tektutor.org   <none>           <none>
+openshift-kube-scheduler-master-3.ocp.tektutor.org         3/3     Running     0          26h   192.168.122.74    master-3.ocp.tektutor.org   <none>           <none>
+revision-pruner-6-master-1.ocp.tektutor.org                0/1     Completed   0          26h   10.129.0.39       master-1.ocp.tektutor.org   <none>           <none>
+revision-pruner-6-master-2.ocp.tektutor.org                0/1     Completed   0          26h   10.128.0.13       master-2.ocp.tektutor.org   <none>           <none>
+revision-pruner-6-master-3.ocp.tektutor.org                0/1     Completed   0          26h   10.130.0.12       master-3.ocp.tektutor.org   <none>           <none>
+revision-pruner-7-master-1.ocp.tektutor.org                0/1     Completed   0          26h   10.129.0.41       master-1.ocp.tektutor.org   <none>           <none>
+revision-pruner-7-master-2.ocp.tektutor.org                0/1     Completed   0          26h   10.128.0.19       master-2.ocp.tektutor.org   <none>           <none>
+revision-pruner-7-master-3.ocp.tektutor.org                0/1     Completed   0          26h   10.130.0.16       master-3.ocp.tektutor.org   <none>           <none>
+revision-pruner-8-master-1.ocp.tektutor.org                0/1     Completed   0          26h   10.129.0.62       master-1.ocp.tektutor.org   <none>           <none>
+revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0          26h   10.128.0.37       master-2.ocp.tektutor.org   <none>           <none>
+revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h   10.130.0.40       master-3.ocp.tektutor.org   <none>           <none>
+</pre>
+
+## Finding OS and Container Runtime installed in each of the OpenShift nodes
+```
+oc get nodes -o wide
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get nodes -o wide</b>
+NAME                        STATUS   ROLES           AGE   VERSION            INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                        KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp.tektutor.org   Ready    master,worker   26h   v1.23.12+6b34f32   192.168.122.39    <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+master-2.ocp.tektutor.org   Ready    master,worker   26h   v1.23.12+6b34f32   192.168.122.184   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+master-3.ocp.tektutor.org   Ready    master,worker   26h   v1.23.12+6b34f32   192.168.122.74    <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+worker-1.ocp.tektutor.org   Ready    worker          26h   v1.23.12+6b34f32   192.168.122.174   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+worker-2.ocp.tektutor.org   Ready    worker          26h   v1.23.12+6b34f32   192.168.122.109   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+</pre>
