@@ -194,6 +194,7 @@
 
 ## OpenShift High-Level Architecture
 ![OpenShift Architecture](OpenShiftArchitecture.png)
+![OpenShift Master Node](master-node.png)
 
 - Master Node
   - RedHat OpenShift supports only Red Hat Enterprise Core OS as the Operating System
@@ -208,4 +209,3 @@
    - use ports below 1000 are prohibited 
 - Openshift enforces deploying application within a project(is nothing but namespace)
 
-![OpenShift Master Node](master-node.png)
