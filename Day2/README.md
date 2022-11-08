@@ -417,3 +417,15 @@ master-3.ocp.tektutor.org   Ready    master,worker   26h   v1.23.12+6b34f32   19
 worker-1.ocp.tektutor.org   Ready    worker          26h   v1.23.12+6b34f32   192.168.122.174   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
 worker-2.ocp.tektutor.org   Ready    worker          26h   v1.23.12+6b34f32   192.168.122.109   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
 </pre>
+
+
+## Demo - Finding node level details in Kubernetes
+```
+kubectl get nodes -o wide
+```
+
+<pre>
+jegan@worker1.tektutor.org:~/Desktop$ <b>kubectl get nodes -o wide</b>
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+minikube   Ready    control-plane   34m   v1.25.3   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.20
+</pre>
