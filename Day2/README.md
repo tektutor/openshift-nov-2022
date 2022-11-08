@@ -1,6 +1,6 @@
 # Day 2 ( 4 Hours )
 
-## Listing OpenShift nodes in the cluster
+## Lab - Listing OpenShift nodes in the cluster
 ```
 oc get nodes
 ```
@@ -16,7 +16,19 @@ worker-1.ocp.tektutor.org   Ready    worker          25h   v1.23.12+6b34f32
 worker-2.ocp.tektutor.org   Ready    worker          25h   v1.23.12+6b34f32
 </pre>
 
-## Listing the projects
+## Demo - Listing the nodes in Kubernetes cluster
+```
+kubectl get nodes
+```
+Expected output
+<pre>
+jegan@worker1.tektutor.org:~/Desktop$ <b>kubectl get nodes</b>
+NAME       STATUS   ROLES           AGE    VERSION
+minikube   Ready    control-plane   3m8s   v1.25.3
+</pre>
+
+
+## Lab - Listing the projects
 ```
 oc get projects
 ```
@@ -92,7 +104,7 @@ openshift-user-workload-monitoring                                Active
 openshift-vsphere-infra                                           Active
 </pre>
 
-## Finding more details about your master node
+## Lab - Finding more details about your master node
 ```
 oc describe node master-1.ocp.tektutor.org
 ```
