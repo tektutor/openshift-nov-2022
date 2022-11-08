@@ -263,3 +263,21 @@ Allocated resources:
   hugepages-2Mi      0 (0%)        0 (0%)
 Events:              <none>
 </pre>
+
+## Demo - Listing the Control Plane components in Kubernetes
+```
+kubectl get po -n kube-system
+```
+
+Expected output
+<pre>
+jegan@worker1.tektutor.org:~/Desktop$ <b>kubectl get po -n kube-system</b>
+NAME                               READY   STATUS    RESTARTS   AGE
+coredns-565d847f94-zn6s7           1/1     Running   0          3m6s
+<b>etcd-minikube                      1/1     Running   0          3m20s
+kube-apiserver-minikube            1/1     Running   0          3m18s
+kube-controller-manager-minikube   1/1     Running   0          3m18s</b>
+kube-proxy-vhnw2                   1/1     Running   0          3m7s
+<b>kube-scheduler-minikube            1/1     Running   0          3m18s</b>
+storage-provisioner                1/1     Running   0          3m15s
+</pre>
