@@ -683,3 +683,27 @@ nginx 06:36:37.57 INFO  ==> ** NGINX setup finished! **
 
 nginx 06:36:37.59 INFO  ==> ** Starting NGINX **
 </pre>
+
+## Points to rembers - What happens within OpenShift when we create a deployment?
+```
+oc create deployment nginx --image=bitnami/nginx:latest --replicas=3
+```
+
+<pre>
+1. oc client tool make REST API call to API server, requesting to create a deployment with name 'nginx' using the container image 'bitnami/nginx:latest'
+2. API Server receives the REST call from oc client tool, it then creates a Deployment record within etcd data-store.
+3. API Server then triggers an event something like "New Deployment Created"
+4. Deployment Controller receives the "New Deployment Created" event, it then makes a REST call to API Server requesting it to create a ReplicaSet with a name nginx-<random-unique-pod-hash-template>.
+5. API Server receives the REST call request from Deployment Controller, it then creates a ReplicaSet record in the etcd data-store.
+6. API Server then triggers an event something like "New ReplicaSet Created"
+7. ReplicaSet Controller receives the event, it then makes REST call to API Server, requesting to create 3 Pods.
+8. API Server receives the request from ReplicaSet Controller, it then creates 3 Pod records(definitions) in the etcd database.
+9. API Server then triggers an event something like "New Pod Created".
+10. Scheduler receives this event, it then identifies healthy nodes where those 3 Pods can be deployed.
+11. Scheduler sends the scheduling recommendations of the 3 Pods as 3 different REST call to API Server.
+12. API Server receives the request from Scheduler, API Server retrieves the Pod entry from etcd database, updates the scheduling recommendations that was recommended by Scheduler.
+13. ApI Server then triggers an avent something like "Pod Scheduled".
+14. Kubelet Container Agent that runs on every node receives this event, if it detects the pod is scheduled on the node where the kubelet is running, it then pulls the respective Container Image.  Kubelet interacts the CRI-O Container Runtime and creates the Containers that are associated with the Pod.
+15. Kubelet monitors the status and health of the Containers running on the current node, it keeps reporting the status as to the API Server frequently(heart-beat) via REST API calls.
+16. API Server receives the REST calls status updates from kubelet, it retrieves the Pod entry from the etcd data-store and updates the status.
+</pre>
