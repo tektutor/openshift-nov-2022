@@ -707,3 +707,5 @@ oc create deployment nginx --image=bitnami/nginx:latest --replicas=3
 15. Kubelet monitors the status and health of the Containers running on the current node, it keeps reporting the status as to the API Server frequently(heart-beat) via REST API calls.
 16. API Server receives the REST calls status updates from kubelet, it retrieves the Pod entry from the etcd data-store and updates the status.
 </pre>
+
+![Deployment Internals](deployment.png)
