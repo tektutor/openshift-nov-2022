@@ -371,7 +371,7 @@ revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0
 revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h
 </pre>
 
-## Finding the nodes where a pod runs
+## Lab - Finding the nodes where a pod runs
 ```
 oc get pods -n openshift-kube-scheduler -o wide
 ```
@@ -402,7 +402,7 @@ revision-pruner-8-master-2.ocp.tektutor.org                0/1     Completed   0
 revision-pruner-8-master-3.ocp.tektutor.org                0/1     Completed   0          26h   10.130.0.40       master-3.ocp.tektutor.org   <none>           <none>
 </pre>
 
-## Finding OS and Container Runtime installed in each of the OpenShift nodes
+## Lab - Finding OS and Container Runtime installed in each of the OpenShift nodes
 ```
 oc get nodes -o wide
 ```
