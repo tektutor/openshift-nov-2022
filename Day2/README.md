@@ -329,12 +329,12 @@ installer-8-master-2.ocp.tektutor.org                     0/1     Completed   0 
 installer-9-master-1.ocp.tektutor.org                     0/1     Completed   0             26h
 installer-9-master-2.ocp.tektutor.org                     0/1     Completed   0             26h
 installer-9-master-3.ocp.tektutor.org                     0/1     Completed   0             26h
-<b>kube-controller-manager-guard-master-1.ocp.tektutor.org   1/1     Running     0             26h
+kube-controller-manager-guard-master-1.ocp.tektutor.org   1/1     Running     0             26h
 kube-controller-manager-guard-master-2.ocp.tektutor.org   1/1     Running     0             26h
-kube-controller-manager-guard-master-3.ocp.tektutor.org   1/1     Running     0             26h</b>
-kube-controller-manager-master-1.ocp.tektutor.org         4/4     Running     0             26h
+kube-controller-manager-guard-master-3.ocp.tektutor.org   1/1     Running     0             26h
+<b>kube-controller-manager-master-1.ocp.tektutor.org         4/4     Running     0             26h
 kube-controller-manager-master-2.ocp.tektutor.org         4/4     Running     0             26h
-kube-controller-manager-master-3.ocp.tektutor.org         4/4     Running     1 (26h ago)   26h
+kube-controller-manager-master-3.ocp.tektutor.org         4/4     Running     1 (26h ago)   26h</b>
 revision-pruner-6-master-1.ocp.tektutor.org               0/1     Completed   0             26h
 revision-pruner-6-master-2.ocp.tektutor.org               0/1     Completed   0             26h
 revision-pruner-6-master-3.ocp.tektutor.org               0/1     Completed   0             26h
