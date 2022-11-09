@@ -40,7 +40,7 @@ $ <b>exit</b>
 ```
 oc delete deploy/nginx
 
-oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-springboot-ms.git
+oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git
 
 oc logs -f bc/hello
 
@@ -49,7 +49,7 @@ oc expose svc/hello
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ <b>oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-spring-boot.git</b>
+(jegan@tektutor.org)$ <b>oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git</b>
 --> Found container image 0fb9f36 (2 weeks old) from registry.redhat.io for "registry.redhat.io/ubi8/openjdk-11:latest"
 
     Java Applications 
