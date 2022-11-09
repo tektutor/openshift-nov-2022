@@ -1299,5 +1299,87 @@ NAME    HOST/PORT                           PATH   SERVICES   PORT       TERMINA
 hello   hello-jegan.apps.ocp.tektutor.org          hello      8080-tcp                 None
 (jegan@tektutor.org)$ <b>curl hello-jegan.apps.ocp.tektutor.org</b>
 Greetings from Spring Boot!
+</pre>
 
+## Deleting project and all resources under the project
+```
+oc delete project jegan
+```
+
+## Lab - Deploying application using a Dockerfile from GitHub repository
+```
+oc new-app --name=hello https://github.com/tektutor/spring-ms.git
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc new-app --name=hello https://github.com/tektutor/spring-ms.git
+--> Found container image cf6479c (4 days old) from docker.io for "docker.io/openjdk:latest"
+
+    * An image stream tag will be created as "openjdk:latest" that will track the source image
+    * A Docker build using source code from https://github.com/tektutor/spring-ms.git will be created
+      * The resulting image will be pushed to image stream tag "hello:latest"
+      * Every time "openjdk:latest" changes a new build will be triggered
+
+--> Creating resources ...
+    imagestream.image.openshift.io "openjdk" created
+    imagestream.image.openshift.io "hello" created
+    buildconfig.build.openshift.io "hello" created
+    deployment.apps "hello" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/hello' to track its progress.
+    Run 'oc status' to view your app.
+</pre>
+
+Checking the build logs
+```
+oc logs -f bc/hello
+```
+
+<pre>
+(jegan@tektutor.org)$ <b>oc logs -f bc/hello</b>
+Cloning "https://github.com/tektutor/spring-ms.git" ...
+	Commit:	dd9d75b76029ced3481833315d937cfc6cf3975a (Update pom.xml)
+	Author:	Jeganathan Swaminathan <jegan@tektutor.org>
+	Date:	Tue Mar 1 12:51:21 2022 +0530
+Replaced Dockerfile FROM image docker.io/openjdk:latest
+time="2022-11-09T06:34:53Z" level=info msg="Not using native diff for overlay, this may cause degraded performance for building images: kernel has CONFIG_OVERLAY_FS_REDIRECT_DIR enabled"
+I1109 06:34:53.971710       1 defaults.go:102] Defaulting to storage driver "overlay" with options [mountopt=metacopy=on].
+Caching blobs under "/var/cache/blobs".
+
+Pulling image docker.io/openjdk@sha256:a02b15cef0e8afd57f3c8e1015ee5322b706a386ab30fb42ecec05e78dd3f752 ...
+Trying to pull docker.io/library/openjdk@sha256:a02b15cef0e8afd57f3c8e1015ee5322b706a386ab30fb42ecec05e78dd3f752...
+Getting image source signatures
+Copying blob sha256:fc9c81bf0e32371a27f88a0c073e7ad8e547174b91403d9cb61f3fe3a3fe682d
+Copying blob sha256:feec22b5b79860f47a87861bed3a29d5431a279cc239b44a2522a9ab5459d844
+Copying blob sha256:ab968c9bcaf076780e21bb249a61cd5dfda4716508c17678f3082057a3c9b8f8
+Copying config sha256:cf6479cba8248dfa2708c0ef1bb295b13e7d5c4ab37d2a26626d4cf29bdb3565
+Writing manifest to image destination
+Storing signatures
+Adding transient rw bind mount for /run/secrets/rhsm
+STEP 1/5: FROM docker.io/openjdk@sha256:a02b15cef0e8afd57f3c8e1015ee5322b706a386ab30fb42ecec05e78dd3f752
+STEP 2/5: COPY hello.jar /app.jar
+time="2022-11-09T06:35:28Z" level=warning msg="Adding metacopy option, configured globally"
+--> f51e7b7d4fa
+STEP 3/5: ENTRYPOINT ["java","-jar","/app.jar"]
+--> cea9935c3f9
+STEP 4/5: ENV "OPENSHIFT_BUILD_NAME"="hello-1" "OPENSHIFT_BUILD_NAMESPACE"="jegan" "OPENSHIFT_BUILD_SOURCE"="https://github.com/tektutor/spring-ms.git" "OPENSHIFT_BUILD_COMMIT"="dd9d75b76029ced3481833315d937cfc6cf3975a"
+--> 942b67a07d7
+STEP 5/5: LABEL "io.openshift.build.commit.author"="Jeganathan Swaminathan <jegan@tektutor.org>" "io.openshift.build.commit.date"="Tue Mar 1 12:51:21 2022 +0530" "io.openshift.build.commit.id"="dd9d75b76029ced3481833315d937cfc6cf3975a" "io.openshift.build.commit.message"="Update pom.xml" "io.openshift.build.commit.ref"="master" "io.openshift.build.name"="hello-1" "io.openshift.build.namespace"="jegan" "io.openshift.build.source-location"="https://github.com/tektutor/spring-ms.git"
+COMMIT temp.builder.openshift.io/jegan/hello-1:887ca02a
+--> 456483e15e3
+Successfully tagged temp.builder.openshift.io/jegan/hello-1:887ca02a
+456483e15e37e41e94d57ac41438ea1dd8a203f06e65cabe7b942e1832a49cfe
+
+Pushing image image-registry.openshift-image-registry.svc:5000/jegan/hello:latest ...
+Getting image source signatures
+Copying blob sha256:fc9c81bf0e32371a27f88a0c073e7ad8e547174b91403d9cb61f3fe3a3fe682d
+Copying blob sha256:feec22b5b79860f47a87861bed3a29d5431a279cc239b44a2522a9ab5459d844
+Copying blob sha256:ab968c9bcaf076780e21bb249a61cd5dfda4716508c17678f3082057a3c9b8f8
+Copying blob sha256:d87602f3c08099e008bc48c364dee7c6d245560ac0618a13719d7219efd19dc3
+Copying config sha256:456483e15e37e41e94d57ac41438ea1dd8a203f06e65cabe7b942e1832a49cfe
+Writing manifest to image destination
+Storing signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/jegan/hello@sha256:dc045cb6984f8a8c9030cf2985f5e017644b5fa550ae9c518cdadf291ba5ce92
+Push successful
 </pre>
