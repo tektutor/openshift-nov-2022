@@ -5,6 +5,16 @@
 oc rsh deploy/nginx
 ```
 
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc rsh deploy/nginx</b>
+$ <b>hostname</b>
+nginx-78644964b4-wbn48
+$ <b>hostname -i</b>
+10.131.0.26
+$ <b>exit</b>
+</pre>
+
 ## Lab -  Getting inside a specific Pod shell
 ```
 oc rsh pod/
