@@ -1430,3 +1430,23 @@ NAME                             HOST/PORT                           PATH   SERV
 route.route.openshift.io/hello   hello-jegan.apps.ocp.tektutor.org          hello      8080                 None
 (jegan@tektutor.org)$ <b>curl hello-jegan.apps.ocp.tektutor.org</b>
 </pre>
+
+## Deleting all the rources that has a specific label
+This is a handy command that can be used to delete all resources under a project matching a specific label.
+```
+oc delete all -l app=hello
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc delete all -l app=hello
+service "hello" deleted
+deployment.apps "hello" deleted
+buildconfig.build.openshift.io "hello" deleted
+build.build.openshift.io "hello-1" deleted
+imagestream.image.openshift.io "hello" deleted
+imagestream.image.openshift.io "openjdk" deleted
+route.route.openshift.io "hello" deleted
+(jegan@tektutor.org)$ oc get all
+No resources found in jegan namespace.
+</pre>
