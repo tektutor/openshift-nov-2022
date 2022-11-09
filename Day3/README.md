@@ -40,7 +40,7 @@ $ <b>exit</b>
 ```
 oc delete deploy/nginx
 
-oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git
+oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git --strategy=docker
 
 oc logs -f bc/hello
 
