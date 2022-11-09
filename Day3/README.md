@@ -1387,8 +1387,8 @@ Push successful
 Creating a public route to access the service
 ```
 oc get all
-oc expose deploy/hello
-oc expose svc/hello
+oc expose deploy/hello --port=8080
+oc expose svc/hello 
 oc get svc,route
 curl hello-jegan.apps.ocp.tektutor.org
 ```
