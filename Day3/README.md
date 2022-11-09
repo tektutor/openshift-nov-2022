@@ -1450,3 +1450,39 @@ route.route.openshift.io "hello" deleted
 (jegan@tektutor.org)$ oc get all
 No resources found in jegan namespace.
 </pre>
+
+## Lab - Deploying application using a container image from OpenShift's Private Registry
+```
+oc new-app image-registry.openshift-image-registry.svc:5000/jegan/hello
+```
+
+## Lab - Deploying an application using a container image from Docker Hub
+```
+oc new-app bitnami/nginx
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc new-app bitnami/nginx
+--> Found container image 82fc406 (13 hours old) from Docker Hub for "bitnami/nginx"
+
+    * An image stream tag will be created as "nginx:latest" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "nginx" created
+    deployment.apps "nginx" created
+    service "nginx" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/nginx' 
+    Run 'oc status' to view your app.
+(jegan@tektutor.org)$ oc status
+In project jegan on server https://api.ocp.tektutor.org:6443
+
+svc/nginx - 172.30.57.123 ports 8080, 8443
+  deployment/nginx deploys istag/nginx:latest 
+    deployment #2 running for 14 seconds - 1 pod
+    deployment #1 deployed 18 seconds ago
+
+1 info identified, use 'oc status --suggest' to see details.
+</pre>
