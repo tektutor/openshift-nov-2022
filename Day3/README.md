@@ -1,4 +1,4 @@
-# Day3
+# Day 3
 
 ## Lab - Getting inside a Pod using its deployment name
 ```
@@ -34,4 +34,43 @@ nginx-78644964b4-jg7wz
 $ <b>hostname -i</b>
 10.130.1.81
 $ <b>exit</b>
+</pre>
+
+## Deploying an application from GitHub source code
+```
+oc delete deploy/nginx
+
+oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-springboot-ms.git
+
+oc logs -f bc/hello
+
+oc expose svc/hello
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-spring-boot.git
+--> Found container image 0fb9f36 (2 weeks old) from registry.redhat.io for "registry.redhat.io/ubi8/openjdk-11:latest"
+
+    Java Applications 
+    ----------------- 
+    Platform for building and running plain Java applications (fat-jar and flat classpath)
+
+    Tags: builder, java
+
+    * An image stream tag will be created as "openjdk-11:latest" that will track the source image
+    * A source build using source code from https://github.com/tektutor/hello-spring-boot.git will be created
+      * The resulting image will be pushed to image stream tag "hello:latest"
+      * Every time "openjdk-11:latest" changes a new build will be triggered
+
+--> Creating resources ...
+    imagestream.image.openshift.io "hello" created
+    buildconfig.build.openshift.io "hello" created
+    deployment.apps "hello" created
+    service "hello" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/hello' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/hello' 
+    Run 'oc status' to view your app.
 </pre>
