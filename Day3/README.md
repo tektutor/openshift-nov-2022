@@ -1452,9 +1452,26 @@ No resources found in jegan namespace.
 </pre>
 
 ## Lab - Deploying application using a container image from OpenShift's Private Registry
+
+Find the nginx image from your OpenShift private registry
 ```
-oc new-app image-registry.openshift-image-registry.svc:5000/jegan/hello
+oc get imagestream --all-namespaces | grep nginx
 ```
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get imagestream --all-namespaces | grep nginx
+jegan       nginx                                                image-registry.openshift-image-registry.svc:5000/jegan/nginx                                                    latest                                                   24 minutes ago
+openshift   nginx                                                image-registry.openshift-image-registry.svc:5000/openshift/nginx                                                1.18-ubi7,1.18-ubi8,1.20-ubi7,1.20-ubi8 + 1 more...      2 days ago
+</pre>
+
+```
+oc new-app image-registry.openshift-image-registry.svc:5000/jegan/nginx
+```
+
+
+
+You will have to replace the image with your image.
+
 
 ## Lab - Deploying an application using a container image from Docker Hub
 ```
