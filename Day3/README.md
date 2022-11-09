@@ -74,3 +74,19 @@ Expected output
      'oc expose service/hello' 
     Run 'oc status' to view your app.
 </pre>
+
+Creating an external route to access your application
+```
+oc expose svc/hello
+oc get route
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get route
+NAME    HOST/PORT                           PATH   SERVICES   PORT       TERMINATION   WILDCARD
+hello   hello-jegan.apps.ocp.tektutor.org          hello      8080-tcp                 None
+(jegan@tektutor.org)$ curl hello-jegan.apps.ocp.tektutor.org
+Greetings from Spring Boot!
+
+</pre>
