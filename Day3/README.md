@@ -1395,7 +1395,7 @@ curl hello-jegan.apps.ocp.tektutor.org
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc get all
+(jegan@tektutor.org)$ <b>oc get all</b>
 NAME                        READY   STATUS      RESTARTS   AGE
 pod/hello-1-build           0/1     Completed   0          99s
 pod/hello-65c89cfbb-x9db4   1/1     Running     0          53s
@@ -1417,16 +1417,16 @@ NAME                                     IMAGE REPOSITORY                       
 imagestream.image.openshift.io/hello     image-registry.openshift-image-registry.svc:5000/jegan/hello     latest   53 seconds ago
 imagestream.image.openshift.io/openjdk   image-registry.openshift-image-registry.svc:5000/jegan/openjdk   latest   About a minute ago
 
-(jegan@tektutor.org)$ oc expose deploy/hello --port=8080
+(jegan@tektutor.org)$ <b>oc expose deploy/hello --port=8080</b>
 service/hello exposed
-(jegan@tektutor.org)$ oc expose svc/hello
+(jegan@tektutor.org)$ <b>oc expose svc/hello</b>
 route.route.openshift.io/hello exposed
 
-(jegan@tektutor.org)$ oc get svc,route
+(jegan@tektutor.org)$ <b>oc get svc,route</b>
 NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 service/hello   ClusterIP   172.30.62.130   <none>        8080/TCP   27s
 
 NAME                             HOST/PORT                           PATH   SERVICES   PORT   TERMINATION   WILDCARD
 route.route.openshift.io/hello   hello-jegan.apps.ocp.tektutor.org          hello      8080                 None
-(jegan@tektutor.org)$ curl hello-jegan.apps.ocp.tektutor.org
+(jegan@tektutor.org)$ <b>curl hello-jegan.apps.ocp.tektutor.org</b>
 </pre>
