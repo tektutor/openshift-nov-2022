@@ -49,7 +49,7 @@ oc expose svc/hello
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-spring-boot.git
+(jegan@tektutor.org)$ <b>oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/hello-spring-boot.git</b>
 --> Found container image 0fb9f36 (2 weeks old) from registry.redhat.io for "registry.redhat.io/ubi8/openjdk-11:latest"
 
     Java Applications 
@@ -82,7 +82,7 @@ oc logs -f bc/hello
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc logs -f bc/hello
+(jegan@tektutor.org)$ <b>oc logs -f bc/hello</b>
 Cloning "https://github.com/tektutor/hello-spring-boot.git" ...
 	Commit:	638c7cbce33e8ea894a8c1ba853a2c09502368eb (Set up CI with Azure Pipelines)
 	Author:	Jeganathan Swaminathan <jegan@tektutor.org>
@@ -1294,10 +1294,10 @@ oc get route
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc get route
+(jegan@tektutor.org)$ <b>oc get route</b>
 NAME    HOST/PORT                           PATH   SERVICES   PORT       TERMINATION   WILDCARD
 hello   hello-jegan.apps.ocp.tektutor.org          hello      8080-tcp                 None
-(jegan@tektutor.org)$ curl hello-jegan.apps.ocp.tektutor.org
+(jegan@tektutor.org)$ <b>curl hello-jegan.apps.ocp.tektutor.org</b>
 Greetings from Spring Boot!
 
 </pre>
