@@ -17,7 +17,8 @@ $ <b>exit</b>
 
 ## Lab -  Getting inside a specific Pod shell
 ```
-oc rsh pod/
+oc get po
+oc rsh nginx-78644964b4-jg7wz
 ```
 
 Expected output
