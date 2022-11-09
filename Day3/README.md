@@ -1383,3 +1383,50 @@ Storing signatures
 Successfully pushed image-registry.openshift-image-registry.svc:5000/jegan/hello@sha256:dc045cb6984f8a8c9030cf2985f5e017644b5fa550ae9c518cdadf291ba5ce92
 Push successful
 </pre>
+
+Creating a public route to access the service
+```
+oc get all
+oc expose deploy/hello
+oc expose svc/hello
+oc get svc,route
+curl hello-jegan.apps.ocp.tektutor.org
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get all
+NAME                        READY   STATUS      RESTARTS   AGE
+pod/hello-1-build           0/1     Completed   0          99s
+pod/hello-65c89cfbb-x9db4   1/1     Running     0          53s
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello   1/1     1            1           101s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/hello-65c89cfbb    1         1         1       53s
+replicaset.apps/hello-7669664b58   0         0         0       101s
+
+NAME                                   TYPE     FROM   LATEST
+buildconfig.build.openshift.io/hello   Docker   Git    1
+
+NAME                               TYPE     FROM          STATUS     STARTED              DURATION
+build.build.openshift.io/hello-1   Docker   Git@dd9d75b   Complete   About a minute ago   49s
+
+NAME                                     IMAGE REPOSITORY                                                 TAGS     UPDATED
+imagestream.image.openshift.io/hello     image-registry.openshift-image-registry.svc:5000/jegan/hello     latest   53 seconds ago
+imagestream.image.openshift.io/openjdk   image-registry.openshift-image-registry.svc:5000/jegan/openjdk   latest   About a minute ago
+
+(jegan@tektutor.org)$ oc expose deploy/hello --port=8080
+service/hello exposed
+(jegan@tektutor.org)$ oc expose svc/hello
+route.route.openshift.io/hello exposed
+
+(jegan@tektutor.org)$ oc get svc,route
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/hello   ClusterIP   172.30.62.130   <none>        8080/TCP   27s
+
+NAME                             HOST/PORT                           PATH   SERVICES   PORT   TERMINATION   WILDCARD
+route.route.openshift.io/hello   hello-jegan.apps.ocp.tektutor.org          hello      8080                 None
+(jegan@tektutor.org)$ curl hello-jegan.apps.ocp.tektutor.org
+</pre>
