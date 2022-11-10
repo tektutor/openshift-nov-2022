@@ -1431,7 +1431,7 @@ route.route.openshift.io/hello   hello-jegan.apps.ocp.tektutor.org          hell
 (jegan@tektutor.org)$ <b>curl hello-jegan.apps.ocp.tektutor.org</b>
 </pre>
 
-## Deleting all the rources that has a specific label
+## Deleting all the resources that has a specific label
 This is a handy command that can be used to delete all resources under a project matching a specific label.
 ```
 oc delete all -l app=hello
