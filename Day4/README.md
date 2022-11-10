@@ -1,6 +1,6 @@
 # Day 4
 
-## Create a nginx deployment
+## Lab - Create a nginx deployment
 ```
 oc new-app bitnami/nginx:latest
 ```
@@ -32,7 +32,7 @@ svc/nginx - 172.30.66.200 ports 8080, 8443
 1 info identified, use 'oc status --suggest' to see details.
 </pre>
 
-## Create a NodePort external service
+#### Create a NodePort external service
 In the below command, the port 8080 represents the ports used by the nginx webserver internally.
 A NodePort within the range 30000 to 32767 whichever is available on all the nodes in the cluster will be used by the NodePort Port.  OpenShift automatically verifies the port chosen is not taken already.
 ```
@@ -67,7 +67,7 @@ External Traffic Policy:  Cluster
 Events:                   <none>
 </pre>
 
-## Testing or Accessing the NodePort service
+#### Testing or Accessing the NodePort service
 
 Find the node ips
 ```
