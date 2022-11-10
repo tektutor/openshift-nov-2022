@@ -124,8 +124,8 @@ Commercial support is available at
 </html>
 ```
 
-## Creating a LoadBalancer service for nginx deployment
-Delete the existing nodeport service
+## Lab - Creating a LoadBalancer service for nginx deployment
+### Delete the existing nodeport service
 ```
 oc delete svc/nginx
 ```
@@ -137,7 +137,7 @@ service "nginx" deleted
 No resources found in jegan namespace.
 </pre>
 
-Create a loadbalancer service
+### Create a loadbalancer service
 ```
 oc expose deploy/nginx --type=LoadBalancer --port=8080
 ```
@@ -147,7 +147,7 @@ Expected output
 service/nginx exposed
 </pre>
 
-Listing the service
+### Listing the service
 ```
 oc get svc
 oc describe svc/nginx
