@@ -185,3 +185,8 @@ Events:
   Normal  IPAllocated   3m1s  metallb-controller  Assigned IP ["192.168.122.90"]
   Normal  nodeAssigned  3m1s  metallb-speaker     announcing from node "master-3.ocp.tektutor.org"
 </pre>
+
+## Lab - Installing Metallb operator as Administrator in your OpenShift cluster from Webconsole
+```
+https://medium.com/tektutor/using-metallb-loadbalancer-with-bare-metal-openshift-onprem-4230944bfa35
+```
