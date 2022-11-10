@@ -33,6 +33,11 @@ svc/nginx - 172.30.66.200 ports 8080, 8443
 </pre>
 
 #### Create a NodePort external service
+Delete the cluster-ip service that the new-app created for us
+```
+oc delete svc/nginx
+```
+
 In the below command, the port 8080 represents the ports used by the nginx webserver internally.
 A NodePort within the range 30000 to 32767 whichever is available on all the nodes in the cluster will be used by the NodePort Port.  OpenShift automatically verifies the port chosen is not taken already.
 ```
