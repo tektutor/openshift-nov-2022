@@ -40,7 +40,7 @@ $ <b>exit</b>
 ```
 oc delete deploy/nginx
 
-oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git --strategy=docker
+oc new-app --name=hello registry.redhat.io/ubi8/openjdk-11:latest~https://github.com/tektutor/spring-ms.git
 
 oc logs -f bc/hello
 
@@ -1308,7 +1308,7 @@ oc delete project jegan
 
 ## Lab - Deploying application using a Dockerfile from GitHub repository
 ```
-oc new-app --name=hello https://github.com/tektutor/spring-ms.git
+oc new-app --name=hello https://github.com/tektutor/spring-ms.git -strategy=docker
 ```
 
 Expected output
