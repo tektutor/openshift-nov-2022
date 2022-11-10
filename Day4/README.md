@@ -123,3 +123,65 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## Creating a LoadBalancer service for nginx deployment
+Delete the existing nodeport service
+```
+oc delete svc/nginx
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc delete svc/nginx
+service "nginx" deleted
+(jegan@tektutor.org)$ oc get svc
+No resources found in jegan namespace.
+</pre>
+
+Create a loadbalancer service
+```
+oc expose deploy/nginx --type=LoadBalancer --port=8080
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc expose deploy/nginx --type=LoadBalancer --port=8080
+service/nginx exposed
+</pre>
+
+Listing the service
+```
+oc get svc
+oc describe svc/nginx
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get svc
+NAME    TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE
+nginx   LoadBalancer   172.30.250.214   192.168.122.90   8080:31282/TCP   3s
+
+(jegan@tektutor.org)$ oc describe svc/nginx
+Name:                     nginx
+Namespace:                jegan
+Labels:                   app=nginx
+                          app.kubernetes.io/component=nginx
+                          app.kubernetes.io/instance=nginx
+Annotations:              <none>
+Selector:                 deployment=nginx
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.30.250.214
+IPs:                      172.30.250.214
+LoadBalancer Ingress:     192.168.122.90
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31282/TCP
+Endpoints:                10.128.2.35:8080,10.130.1.106:8080,10.131.0.139:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+  Type    Reason        Age   From                Message
+  ----    ------        ----  ----                -------
+  Normal  IPAllocated   3m1s  metallb-controller  Assigned IP ["192.168.122.90"]
+  Normal  nodeAssigned  3m1s  metallb-speaker     announcing from node "master-3.ocp.tektutor.org"
+</pre>
