@@ -67,3 +67,54 @@ External Traffic Policy:  Cluster
 Events:                   <none>
 </pre>
 
+## Testing or Accessing the NodePort service
+
+Find the node ips
+```
+oc get nodes -o wide
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get nodes -o wide</b>
+NAME                        STATUS   ROLES           AGE    VERSION            INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                        KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp.tektutor.org   Ready    master,worker   3d1h   v1.23.12+6b34f32   <b>192.168.122.39</b>    <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+master-2.ocp.tektutor.org   Ready    master,worker   3d1h   v1.23.12+6b34f32   <b>192.168.122.184</b>   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+master-3.ocp.tektutor.org   Ready    master,worker   3d1h   v1.23.12+6b34f32   <b>192.168.122.74</b>    <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+worker-1.ocp.tektutor.org   Ready    worker          3d1h   v1.23.12+6b34f32   <b>192.168.122.174</b>   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+worker-2.ocp.tektutor.org   Ready    worker          3d1h   v1.23.12+6b34f32   <b>192.168.122.109</b>   <none>        Red Hat Enterprise Linux CoreOS 410.84.202210130022-0 (Ootpa)   4.18.0-305.62.1.el8_4.x86_64   cri-o://1.23.3-17.rhaos4.10.git016b1ca.el8
+</pre>
+
+```
+curl 192.168.122.109:31585
+curl 192.168.122.174:31585
+curl 192.168.122.74:31585
+curl 192.168.122.184:31585
+curl 192.168.122.39:31585
+```
+Expected output
+```
+(jegan@tektutor.org)$ curl 192.168.122.109:31585
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
