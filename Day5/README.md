@@ -133,7 +133,12 @@ spring-tektutor-helloms   spring-tektutor-helloms-jegan.apps.ocp.tektutor.org   
 
 ## Lab - Autogenerate deployment yaml to start with
 ```
-oc create deploy mysql --image=bitnami/mysql:latest --dry-run=client -o yaml
+oc create deploy mysql --image=bitnami/mysql:latest --dry-run=client -o yaml > mysql-deploy.yml
+oc apply -f mysql-deploy.yml
+oc expose deploy/mysql --type=ClusterIP --port=8080 --dry-run=client -o yaml > mysql-clusterip-svc.yml
+oc expose deploy/mysql --type=NodePort --port=8080 --dry-run=client -o yaml > mysql-nodeport-svc.yml
+oc expose deploy/mysql --type=LoadBalancer --port=8080 --dry-run=client -o yaml > mysql-lb-svc.yml
+oc expose svc/mysql --dry-run=client -o yaml > mysql-route.yml
 ```
 
 Expected output
@@ -163,4 +168,30 @@ spec:
         name: mysql
         resources: {}
 status: {}
+
+(jegan@tektutor.org)$ oc apply -f mysql-deploy.yml 
+deployment.apps/mysql created
+(jegan@tektutor.org)$ oc expose deploy/mysql --type=ClusterIP --port=8080 --dry-run=client -o yaml > mysql-clusterip-svc.yml
+(jegan@tektutor.org)$ oc expose deploy/mysql --type=NodePort --port=8080 --dry-run=client -o yaml > mysql-nodeport-svc.yml 
+(jegan@tektutor.org)$ oc expose deploy/mysql --type=LoadBalancer --port=8080 --dry-run=client -o yaml > mysql-lb-svc.yml
+(jegan@tektutor.org)$ ls
+mysql-clusterip-svc.yml  mysql-deploy.yml  mysql-lb-svc.yml  mysql-login-credentials.yml  mysql-nodeport-svc.yml
+(jegan@tektutor.org)$ vim mysql-clusterip-svc.yml 
+(jegan@tektutor.org)$ oc apply -f mysql-clusterip-svc.yml 
+service/mysql created
+(jegan@tektutor.org)$ oc get deploy, svc
+error: arguments in resource/name form must have a single resource and name
+(jegan@tektutor.org)$ oc get deploy,svc
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mysql                     1/1     1            1           93s
+deployment.apps/spring-tektutor-helloms   1/1     1            1           56m
+
+NAME                              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+service/mysql                     ClusterIP   172.30.43.15   <none>        8080/TCP                     9s
+service/spring-tektutor-helloms   ClusterIP   172.30.11.2    <none>        8080/TCP,8443/TCP,8778/TCP   56m
+(jegan@tektutor.org)$ oc expose svc/mysql --dry-run=client -o yaml > mysql-route.yml
+(jegan@tektutor.org)$ vim mysql-route.yml 
+(jegan@tektutor.org)$ ls
+mysql-clusterip-svc.yml  mysql-lb-svc.yml             mysql-nodeport-svc.yml
+mysql-deploy.yml         mysql-login-credentials.yml  mysql-route.yml
 </pre>
