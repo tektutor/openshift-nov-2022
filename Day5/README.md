@@ -130,3 +130,37 @@ spring-tektutor-helloms   spring-tektutor-helloms-jegan.apps.ocp.tektutor.org   
 (jegan@tektutor.org)$ <b>curl spring-tektutor-helloms-jegan.apps.ocp.tektutor.org</b>
 <b>Hello Java Microsrvice !</b>
 </pre>
+
+## Lab - Autogenerate deployment yaml to start with
+```
+oc create deploy mysql --image=bitnami/mysql:latest --dry-run=client -o yaml
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc create deploy mysql --image=bitnami/mysql:latest --dry-run=client -o yaml</b>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: bitnami/mysql:latest
+        name: mysql
+        resources: {}
+status: {}
+</pre>
