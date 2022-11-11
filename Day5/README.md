@@ -196,7 +196,7 @@ mysql-clusterip-svc.yml  mysql-lb-svc.yml             mysql-nodeport-svc.yml
 mysql-deploy.yml         mysql-login-credentials.yml  mysql-route.yml
 </pre>
 
-## Lab - Extending OpenShift API by your own Custom Resources
+## Lab - Extending OpenShift API by adding your own Custom Resources
 ```
 cd ~/openshift-nov-2022
 git pull
