@@ -195,3 +195,22 @@ service/spring-tektutor-helloms   ClusterIP   172.30.11.2    <none>        8080/
 mysql-clusterip-svc.yml  mysql-lb-svc.yml             mysql-nodeport-svc.yml
 mysql-deploy.yml         mysql-login-credentials.yml  mysql-route.yml
 </pre>
+
+## Extending OpenShift API by your own Custom Resources
+```
+cd ~/openshift-nov-2022
+git pull
+
+cd Day5/CRDs
+oc apply -f training-crd.yml
+oc apply -f openshift-training.yml
+
+oc get trainings
+oc get training
+oc get train
+oc edit train/openshift-training
+oc describe train/openshift-training
+
+oc delete -f openshift-training.yml
+oc delete -f training-crd.yml
+```
