@@ -6,7 +6,7 @@ cd ~
 git clone https://github.com/tektutor/openshift-nov-2022.git
 ```
 
-## Using a multi stage dockerfile to build and deploy your java application
+## Lab - Using a multi stage dockerfile to build and deploy your java application
 
 You need to build this image before you can push the image to your Docker Hub ( all the below steps can be skipped as I have already pushed the image to my Docker Hub )
 ```
