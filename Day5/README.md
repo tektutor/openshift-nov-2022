@@ -19,7 +19,7 @@ docker push tektutor/spring-tektuotr-helloms:latest
 ```
 Expected output ( Many lines are removed to keep it short )
 <pre>
-(jegan@tektutor.org)$ docker build -t tektutor/spring-hello-ms:1.0 .
+(jegan@tektutor.org)$ <b>docker build -t tektutor/spring-hello-ms:1.0 .</b>
 Sending build context to Docker daemon  8.704kB
 Step 1/9 : FROM registry.redhat.io/ubi8/openjdk-11:latest as builder
  ---> 0c308464b19e
