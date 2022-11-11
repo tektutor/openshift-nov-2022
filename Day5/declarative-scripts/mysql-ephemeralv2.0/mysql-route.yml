@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: ""
+    name: mysql
+    weight: null
+status: {}
