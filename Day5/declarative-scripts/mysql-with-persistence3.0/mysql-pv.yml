@@ -1,12 +1,14 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mysql-pv
+  name: mysql-pv-jegan # Replace 'jegan' with your name
+  labels:
+    name: jegan # Replace 'jegan' with your name
 spec:
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
   nfs:
-    server: 192.168.1.80
-    path: /mnt/mysql
+    server: 192.168.1.80 # Replace this with your CentOS server IP 192.168.1.206 or 192.168.1.207
+    path: /mnt/mysql # Replace this path with /mnt/userx 
