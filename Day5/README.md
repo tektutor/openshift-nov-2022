@@ -214,3 +214,15 @@ oc describe train/openshift-training
 oc delete -f openshift-training.yml
 oc delete -f training-crd.yml
 ```
+
+## Deploying mysql db server with persistent volume
+```
+cd ~/openshift-nov-2022
+git pull
+
+cd Day5/declarative-scripts/mysql-with-persistence3.0
+oc apply -f mysql-login-credentials.yml
+oc apply -f mysql-pv.yml
+oc apply -f mysql-pvc.yml
+oc apply -f mysql-deploy.yml
+```
