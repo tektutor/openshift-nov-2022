@@ -20,15 +20,6 @@
 ## What is Custom OpenShift Controller ?
 - To manage your Custom Resources, you need to develop and deploy your own Custom Controller
 - Controllers can be developed natively in Go Programming language, but you could also develop in Java, Ansible, etc.,
-# 🦌 Demo - Install Operator SDK to develop your own Custom Operators
-
-## What are Kubernetes/OpenShift Operators?
-- is a way to extend a Kubernetes/OpenShift API
-- via operator you can add your own Custom Resources in Kubernetes/OpenShift cluster
-- to manage the Custom Resources we also need to provide Custom Controllers
-- in short Operator is collection of Custom Resources and Custom Controllers that  manage the Custom Resource
-- Operator also helps us bundle/package our Openshift applications as Operators
-  which can then later be deployed easily on other Openshift clusters
 
 ## What is an Operator Hub?
 - a web portal that has many ready to deploy operators for various applications
@@ -41,6 +32,8 @@
 - OLM simplifies installation of other Operators
 - OLM integrates Operator Hub within OpenShift web console
 - OLM enables installation/uninstallation of operators via the exiting oc/kubectl cli tool
+
+# 🦌 Lab - Install Operator SDK to develop your own Custom Operators
 
 ## OpenShift Operator SDK 
 
