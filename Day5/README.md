@@ -219,10 +219,25 @@ oc delete -f training-crd.yml
 ```
 cd ~/openshift-nov-2022
 git pull
-
 cd Day5/declarative-scripts/mysql-with-persistence3.0
+```
+
+In the above folder, edit the mysql-pv.yml, mysql-pvc.yml and mysql-deploy and update as per the comments given in those files. Once the files are updated, you may proceed with the below commands
+```
 oc apply -f mysql-login-credentials.yml
 oc apply -f mysql-pv.yml
 oc apply -f mysql-pvc.yml
 oc apply -f mysql-deploy.yml
+```
+
+#### Cleaning up mysql deployment
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day5/declarative-scripts/mysql-with-persistence3.0
+
+oc delete -f mysql-deploy.yml
+oc delete -f mysql-login-credentails.yml
+oc delete -f mysql-pvc.yml
+oc delete -f mysql-pv.yml
 ```
