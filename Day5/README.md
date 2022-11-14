@@ -215,7 +215,7 @@ oc delete -f openshift-training.yml
 oc delete -f training-crd.yml
 ```
 
-## Deploying mysql db server with persistent volume
+## Lab - Deploying mysql db server with persistent volume
 ```
 cd ~/openshift-nov-2022
 git pull
