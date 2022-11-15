@@ -298,7 +298,7 @@ taskrun-multiple-params   10 seconds ago   10s        Succeeded
 [step1] Hello World !
 </pre>
 
-## Lab - Task with multiple step
+## ⛹️‍♂️ Lab - Task with multiple step
 ```
 cd ~/openshift-nov-2022
 git pull
