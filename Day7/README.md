@@ -98,4 +98,5 @@ Running the pod
 ```
 oc apply -f pod.yml
 oc get po -w
+oc logs my-pod
 ```
