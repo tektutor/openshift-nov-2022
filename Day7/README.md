@@ -190,3 +190,33 @@ tkn taskrun logs hello-run-bwpmn -f -n jegan
 (jegan@tektutor.org)$ <b>tkn taskrun logs hello-run-bwpmn -f -n jegan</b>
 [echo] Hello Tekton !
 </pre>
+
+## Lab - Task that accepts parameters
+
+task.yml
+```
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello-task-with-params
+spec:
+  params:
+  - name: message
+    type: string
+    description: this is a user-defined variable that accepts any message
+    default: "Hello Tekton Task !"
+  steps:
+  - name: step1
+    image: ubuntu
+    command: 
+    - echo
+    args:
+    - $(params.message)
+```
+
+Running the task
+```
+oc apply -f task.yml
+tkn task start hello-task-with-params
+tkn tr logs -f --last
+```
