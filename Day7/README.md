@@ -248,7 +248,7 @@ hello-run-bwpmn                    48 minutes ago   17s        Succeeded
 [step1] Hello World!
 </pre>
 
-## Lab - Deleting Task and TaskRun
+## ⛹️‍♂️ Lab - Deleting Task and TaskRun
 ```
 tkn task delete hello-task-with-multiple-params
 tkn tr delete taskrun-multiple-params
