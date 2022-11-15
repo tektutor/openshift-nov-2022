@@ -48,14 +48,14 @@ metallb-operator.metallb-system                                   6d2h
 openshift-pipelines-operator-rh.openshift-operators               50m
 </pre>
 
-## - Listing all the resource of Tekton operators
+## ⛹️‍♂️ Lab - Listing all the resource of Tekton operators
 ```
 oc get all -n openshift-operators
 ```
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc get all -n openshift-operators
+(jegan@tektutor.org)$ <b>oc get all -n openshift-operators</b>
 NAME                                               READY   STATUS    RESTARTS   AGE
 pod/openshift-pipelines-operator-77d7d5f85-m5gs8   2/2     Running   0          49m
 pod/tekton-operator-webhook-7d6dbcbb6f-m7xbz       1/1     Running   0          49m
