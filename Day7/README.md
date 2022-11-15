@@ -33,3 +33,30 @@
 - Workspaces are basically Volumes(directory)
 - Workspaces are used by a Task to retrieve inputs and store outputs
 - Workspaces can be mounted from a ConfigMap, Secret, Persistent Volume Claim or an emptyDir volume
+
+## ⛹️‍♂️ Lab - Understanding Pod restart policy
+
+### pod.yml
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: ubuntu
+spec:
+  restartPolicy: Never
+  containers:
+  - name: c1
+    image: ubuntu
+    command:
+    - echo
+    args:
+    - "Hello Pod !"
+```
+
+Running the pod
+```
+oc apply -f pod.yml
+oc get po -w
+```
