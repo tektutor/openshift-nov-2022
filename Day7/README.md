@@ -247,3 +247,19 @@ hello-run-bwpmn                    48 minutes ago   17s        Succeeded
 (jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-82h4f
 [step1] Hello World!
 </pre>
+
+## Lab - Task that accepts multiple parameters with a declarative TaskRun
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day7/task-with-params
+
+oc apply -f task-with-multiple-params.yml
+oc apply -f taskrun.yml
+
+tkn task ls
+tkn tr logs -f --last
+```
+
+Expected output
+
