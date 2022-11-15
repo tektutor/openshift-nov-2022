@@ -34,6 +34,45 @@
 - Workspaces are used by a Task to retrieve inputs and store outputs
 - Workspaces can be mounted from a ConfigMap, Secret, Persistent Volume Claim or an emptyDir volume
 
+## ⛹️‍♂️ Lab - Listing the operators
+```
+oc get operators
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get operators</b>
+NAME                                                              AGE
+ansible-automation-platform-operator.ansible-automation-platfor   3d22h
+metallb-operator.metallb-system                                   6d2h
+openshift-pipelines-operator-rh.openshift-operators               50m
+</pre>
+
+## - Listing all the resource of Tekton operators
+```
+oc get all -n openshift-operators
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get all -n openshift-operators
+NAME                                               READY   STATUS    RESTARTS   AGE
+pod/openshift-pipelines-operator-77d7d5f85-m5gs8   2/2     Running   0          49m
+pod/tekton-operator-webhook-7d6dbcbb6f-m7xbz       1/1     Running   0          49m
+
+NAME                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/tekton-operator           ClusterIP   172.30.91.237   <none>        9090/TCP   49m
+service/tekton-operator-webhook   ClusterIP   172.30.180.24   <none>        443/TCP    49m
+
+NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/openshift-pipelines-operator   1/1     1            1           49m
+deployment.apps/tekton-operator-webhook        1/1     1            1           49m
+
+NAME                                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/openshift-pipelines-operator-77d7d5f85   1         1         1       49m
+replicaset.apps/tekton-operator-webhook-7d6dbcbb6f       1         1         1       49m
+</pre>
+
 ## ⛹️‍♂️ Lab - Understanding Pod restart policy
 
 ### pod.yml
