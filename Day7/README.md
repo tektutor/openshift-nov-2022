@@ -191,7 +191,7 @@ tkn taskrun logs hello-run-bwpmn -f -n jegan
 [echo] Hello Tekton !
 </pre>
 
-## Lab - Task that accepts parameters
+## ⛹️‍♂️ Lab - Task that accepts parameters
 
 task.yml
 ```
@@ -248,7 +248,26 @@ hello-run-bwpmn                    48 minutes ago   17s        Succeeded
 [step1] Hello World!
 </pre>
 
-## Lab - Task that accepts multiple parameters with a declarative TaskRun
+## Lab - Deleting Task and TaskRun
+```
+tkn task delete hello-task-with-multiple-params
+tkn tr delete taskrun-multiple-params
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ tkn task delete hello-task-with-multiple-params
+Are you sure you want to delete Task(s) "hello-task-with-multiple-params" (y/n): y
+Tasks deleted: "hello-task-with-multiple-params"
+(jegan@tektutor.org)$ tkn tr ls
+NAME                      STARTED         DURATION   STATUS
+taskrun-multiple-params   7 minutes ago   9s         Succeeded
+(jegan@tektutor.org)$ tkn tr delete taskrun-multiple-params
+Are you sure you want to delete TaskRun(s) "taskrun-multiple-params" (y/n): y
+TaskRuns deleted: "taskrun-multiple-params"
+</pre>
+
+## ⛹️‍♂️ Lab - Task that accepts multiple parameters with a declarative TaskRun
 ```
 cd ~/openshift-nov-2022
 git pull
@@ -262,4 +281,19 @@ tkn tr logs -f --last
 ```
 
 Expected output
-
+<pre>
+(jegan@tektutor.org)$ oc apply -f task
+taskrun.yml                    task-with-multiple-params.yml  task.yml
+(jegan@tektutor.org)$ oc apply -f task-with-multiple-params.yml 
+task.tekton.dev/hello-task-with-multiple-params created
+(jegan@tektutor.org)$ oc apply -f taskrun.yml 
+taskrun.tekton.dev/taskrun-multiple-params created
+(jegan@tektutor.org)$ tkn task ls
+NAME                              DESCRIPTION   AGE
+hello-task-with-multiple-params                 9 seconds ago
+(jegan@tektutor.org)$ tkn tr ls
+NAME                      STARTED          DURATION   STATUS
+taskrun-multiple-params   10 seconds ago   10s        Succeeded
+(jegan@tektutor.org)$ tkn tr logs -f --last
+[step1] Hello World !
+</pre>
