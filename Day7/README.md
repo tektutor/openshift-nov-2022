@@ -101,7 +101,7 @@ oc get po -w
 oc logs my-pod
 ```
 
-## Lab - Creating your first Tekton Task
+## ⛹️‍♂️ Lab - Creating your first Tekton Task
 
 Create a file named task.yml with below content
 ```
@@ -129,21 +129,21 @@ tkn taskrun logs --last
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc apply -f task.yml 
+(jegan@tektutor.org)$ <b>oc apply -f task.yml</b>
 task.tekton.dev/hello created
-(jegan@tektutor.org)$ oc get tasks
+(jegan@tektutor.org)$ <b>oc get tasks</b>
 NAME    AGE
 hello   4s
-(jegan@tektutor.org)$ oc get task
+(jegan@tektutor.org)$ <b>oc get task</b>
 NAME    AGE
 hello   5s
-(jegan@tektutor.org)$ tkn tasks list
+(jegan@tektutor.org)$ <b>tkn tasks list</b>
 NAME    DESCRIPTION   AGE
 hello                 13 seconds ago
-(jegan@tektutor.org)$ tkn tasks ls
+(jegan@tektutor.org)$ <b>tkn tasks ls</b>
 NAME    DESCRIPTION   AGE
 hello                 16 seconds ago
-(jegan@tektutor.org)$ oc describe task/hello
+(jegan@tektutor.org)$ <b>oc describe task/hello</b>
 Name:         hello
 Namespace:    jegan
 Labels:       <none>
@@ -179,16 +179,71 @@ Spec:
     Name:   echo
     Resources:
 Events:  <none>
-(jegan@tektutor.org)$ tkn tkn ls
-Error: command tkn tkn doesn't exist. Run tkn help for available commands
-(jegan@tektutor.org)$ tkn task ls
+(jegan@tektutor.org)$ <b>tkn task ls</b>
 NAME    DESCRIPTION   AGE
 hello                 44 seconds ago
-(jegan@tektutor.org)$ tkn task start hello
+(jegan@tektutor.org)$ <b>tkn task start hello</b>
 TaskRun started: hello-run-bwpmn
 
 In order to track the TaskRun progress run:
 tkn taskrun logs hello-run-bwpmn -f -n jegan
-(jegan@tektutor.org)$ tkn taskrun logs hello-run-bwpmn -f -n jegan
+(jegan@tektutor.org)$ <b>tkn taskrun logs hello-run-bwpmn -f -n jegan</b>
 [echo] Hello Tekton !
+</pre>
+
+## Lab - Task that accepts parameters
+
+task.yml
+```
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello-task-with-params
+spec:
+  params:
+  - name: message
+    type: string
+    description: this is a user-defined variable that accepts any message
+    default: "Hello Tekton Task !"
+  steps:
+  - name: step1
+    image: ubuntu
+    command: 
+    - echo
+    args:
+    - $(params.message)
+```
+
+Running the task
+```
+oc apply -f task.yml
+tkn task start hello-task-with-params
+tkn tr logs -f --last
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ tkn taskrun logs hello-task-with-params-run-zb59b -f -n jegan
+[step1] Hello Tekton Task !
+
+(jegan@tektutor.org)$ tkn task start hello-task-with-params
+? Value for param `message` of type `string`? (Default is `Hello Tekton Task !`) Hello World!
+TaskRun started: hello-task-with-params-run-82h4f
+
+In order to track the TaskRun progress run:
+tkn taskrun logs hello-task-with-params-run-82h4f -f -n jegan
+(jegan@tektutor.org)$ tkn taskrun logs -f --last
+[step1] Hello World!
+
+(jegan@tektutor.org)$ tkn taskrun ls
+NAME                               STARTED          DURATION   STATUS
+hello-task-with-params-run-82h4f   28 seconds ago   10s        Succeeded
+hello-task-with-params-run-zb59b   57 seconds ago   9s         Succeeded
+example-taskrun                    8 minutes ago    28s        Succeeded
+hello-run-bwpmn                    48 minutes ago   17s        Succeeded
+(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-zb59b
+[step1] Hello Tekton Task !
+
+(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-82h4f
+[step1] Hello World!
 </pre>
