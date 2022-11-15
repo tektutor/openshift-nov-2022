@@ -220,3 +220,30 @@ oc apply -f task.yml
 tkn task start hello-task-with-params
 tkn tr logs -f --last
 ```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ tkn taskrun logs hello-task-with-params-run-zb59b -f -n jegan
+[step1] Hello Tekton Task !
+
+(jegan@tektutor.org)$ tkn task start hello-task-with-params
+? Value for param `message` of type `string`? (Default is `Hello Tekton Task !`) Hello World!
+TaskRun started: hello-task-with-params-run-82h4f
+
+In order to track the TaskRun progress run:
+tkn taskrun logs hello-task-with-params-run-82h4f -f -n jegan
+(jegan@tektutor.org)$ tkn taskrun logs -f --last
+[step1] Hello World!
+
+(jegan@tektutor.org)$ tkn taskrun ls
+NAME                               STARTED          DURATION   STATUS
+hello-task-with-params-run-82h4f   28 seconds ago   10s        Succeeded
+hello-task-with-params-run-zb59b   57 seconds ago   9s         Succeeded
+example-taskrun                    8 minutes ago    28s        Succeeded
+hello-run-bwpmn                    48 minutes ago   17s        Succeeded
+(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-zb59b
+[step1] Hello Tekton Task !
+
+(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-82h4f
+[step1] Hello World!
+</pre>
