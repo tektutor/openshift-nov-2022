@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello-task-with-multiple-params
+spec:
+  params:
+  - name: message1
+    type: string
+  - name: message2
+    type: string 
+  steps:
+  - name: step1
+    image: ubuntu
+    command: 
+    - echo
+    args:
+    - $(params.message1)
+    - $(params.message2)
