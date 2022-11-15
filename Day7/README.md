@@ -191,7 +191,7 @@ tkn taskrun logs hello-run-bwpmn -f -n jegan
 [echo] Hello Tekton !
 </pre>
 
-## Lab - Task that accepts parameters
+## ⛹️‍♂️ Lab - Task that accepts parameters
 
 task.yml
 ```
@@ -223,27 +223,116 @@ tkn tr logs -f --last
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ tkn taskrun logs hello-task-with-params-run-zb59b -f -n jegan
+(jegan@tektutor.org)$ <b>tkn taskrun logs hello-task-with-params-run-zb59b -f -n jegan</b>
 [step1] Hello Tekton Task !
 
-(jegan@tektutor.org)$ tkn task start hello-task-with-params
+(jegan@tektutor.org)$ <b>tkn task start hello-task-with-params</b>
 ? Value for param `message` of type `string`? (Default is `Hello Tekton Task !`) Hello World!
 TaskRun started: hello-task-with-params-run-82h4f
 
 In order to track the TaskRun progress run:
 tkn taskrun logs hello-task-with-params-run-82h4f -f -n jegan
-(jegan@tektutor.org)$ tkn taskrun logs -f --last
+(jegan@tektutor.org)$ <b>tkn taskrun logs -f --last</b>
 [step1] Hello World!
 
-(jegan@tektutor.org)$ tkn taskrun ls
+(jegan@tektutor.org)$ <b>tkn taskrun ls</b>
 NAME                               STARTED          DURATION   STATUS
 hello-task-with-params-run-82h4f   28 seconds ago   10s        Succeeded
 hello-task-with-params-run-zb59b   57 seconds ago   9s         Succeeded
 example-taskrun                    8 minutes ago    28s        Succeeded
 hello-run-bwpmn                    48 minutes ago   17s        Succeeded
-(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-zb59b
+(jegan@tektutor.org)$ <b>tkn tr logs hello-task-with-params-run-zb59b</b>
 [step1] Hello Tekton Task !
 
-(jegan@tektutor.org)$ tkn tr logs hello-task-with-params-run-82h4f
+(jegan@tektutor.org)$ <b>tkn tr logs hello-task-with-params-run-82h4f</b>
 [step1] Hello World!
 </pre>
+
+## ⛹️‍♂️ Lab - Deleting Task and TaskRun
+```
+tkn task delete hello-task-with-multiple-params
+tkn tr delete taskrun-multiple-params
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>tkn task delete hello-task-with-multiple-params</b>
+Are you sure you want to delete Task(s) "hello-task-with-multiple-params" (y/n): <b>y</b>
+Tasks deleted: "hello-task-with-multiple-params"
+(jegan@tektutor.org)$ <b>tkn tr ls</b>
+NAME                      STARTED         DURATION   STATUS
+taskrun-multiple-params   7 minutes ago   9s         Succeeded
+(jegan@tektutor.org)$ <b>tkn tr delete taskrun-multiple-params</b>
+Are you sure you want to delete TaskRun(s) "taskrun-multiple-params" (y/n): <b>y</b>
+TaskRuns deleted: "taskrun-multiple-params"
+</pre>
+
+## ⛹️‍♂️ Lab - Task that accepts multiple parameters with a declarative TaskRun
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day7/task-with-params
+
+oc apply -f task-with-multiple-params.yml
+oc apply -f taskrun.yml
+
+tkn task ls
+tkn tr logs -f --last
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc apply -f task</b>
+taskrun.yml                    task-with-multiple-params.yml  task.yml
+(jegan@tektutor.org)$ <b>oc apply -f task-with-multiple-params.yml</b>
+task.tekton.dev/hello-task-with-multiple-params created
+(jegan@tektutor.org)$ <b>oc apply -f taskrun.yml</b>
+taskrun.tekton.dev/taskrun-multiple-params created
+(jegan@tektutor.org)$ <b>tkn task ls</b>
+NAME                              DESCRIPTION   AGE
+hello-task-with-multiple-params                 9 seconds ago
+(jegan@tektutor.org)$ <b>tkn tr ls</b>
+NAME                      STARTED          DURATION   STATUS
+taskrun-multiple-params   10 seconds ago   10s        Succeeded
+(jegan@tektutor.org)$ <b>tkn tr logs -f --last</b>
+[step1] Hello World !
+</pre>
+
+## Lab - Task with multiple step
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day7/task-with-multiple-steps/
+
+oc apply -f task.yml
+tkn t ls
+tkn t start task-with-multiple-steps
+tkn tr ls
+tkn tr logs -f --last
+```
+
+The expected output
+<pre>
+(jegan@tektutor.org)$ oc apply -f task.yml 
+task.tekton.dev/task-with-multiple-steps created
+(jegan@tektutor.org)$ tkn t ls
+NAME                              DESCRIPTION   AGE
+hello-task-with-multiple-params                 8 minutes ago
+task-with-multiple-steps                        4 seconds ago
+(jegan@tektutor.org)$ tkn tr ls
+NAME                      STARTED         DURATION   STATUS
+taskrun-multiple-params   8 minutes ago   10s        Succeeded
+(jegan@tektutor.org)$ tkn t start task-with-multiple-steps
+TaskRun started: task-with-multiple-steps-run-mcfn4
+
+In order to track the TaskRun progress run:
+tkn taskrun logs task-with-multiple-steps-run-mcfn4 -f -n jegan
+
+(jegan@tektutor.org)$ tkn tr logs -f --last
+[step-1] Step 1 => Hello TekTon !
+
+[step-2] Step 2 => Hello TekTon !
+
+[step-3] Step 3 => Hello TekTon !
+</pre>
+
