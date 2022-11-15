@@ -101,7 +101,7 @@ oc get po -w
 oc logs my-pod
 ```
 
-## Lab - Creating your first Tekton Task
+## ⛹️‍♂️ Lab - Creating your first Tekton Task
 
 Create a file named task.yml with below content
 ```
@@ -129,21 +129,21 @@ tkn taskrun logs --last
 
 Expected output
 <pre>
-(jegan@tektutor.org)$ oc apply -f task.yml 
+(jegan@tektutor.org)$ <b>oc apply -f task.yml</b>
 task.tekton.dev/hello created
-(jegan@tektutor.org)$ oc get tasks
+(jegan@tektutor.org)$ <b>oc get tasks</b>
 NAME    AGE
 hello   4s
-(jegan@tektutor.org)$ oc get task
+(jegan@tektutor.org)$ <b>oc get task</b>
 NAME    AGE
 hello   5s
-(jegan@tektutor.org)$ tkn tasks list
+(jegan@tektutor.org)$ <b>tkn tasks list</b>
 NAME    DESCRIPTION   AGE
 hello                 13 seconds ago
-(jegan@tektutor.org)$ tkn tasks ls
+(jegan@tektutor.org)$ <b>tkn tasks ls</b>
 NAME    DESCRIPTION   AGE
 hello                 16 seconds ago
-(jegan@tektutor.org)$ oc describe task/hello
+(jegan@tektutor.org)$ <b>oc describe task/hello</b>
 Name:         hello
 Namespace:    jegan
 Labels:       <none>
@@ -179,16 +179,14 @@ Spec:
     Name:   echo
     Resources:
 Events:  <none>
-(jegan@tektutor.org)$ tkn tkn ls
-Error: command tkn tkn doesn't exist. Run tkn help for available commands
-(jegan@tektutor.org)$ tkn task ls
+(jegan@tektutor.org)$ <b>tkn task ls</b>
 NAME    DESCRIPTION   AGE
 hello                 44 seconds ago
-(jegan@tektutor.org)$ tkn task start hello
+(jegan@tektutor.org)$ <b>tkn task start hello</b>
 TaskRun started: hello-run-bwpmn
 
 In order to track the TaskRun progress run:
 tkn taskrun logs hello-run-bwpmn -f -n jegan
-(jegan@tektutor.org)$ tkn taskrun logs hello-run-bwpmn -f -n jegan
+(jegan@tektutor.org)$ <b>tkn taskrun logs hello-run-bwpmn -f -n jegan</b>
 [echo] Hello Tekton !
 </pre>
