@@ -297,3 +297,42 @@ taskrun-multiple-params   10 seconds ago   10s        Succeeded
 (jegan@tektutor.org)$ <b>tkn tr logs -f --last</b>
 [step1] Hello World !
 </pre>
+
+## Lab - Task with multiple step
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day7/task-with-multiple-steps/
+
+oc apply -f task.yml
+tkn t ls
+tkn t start task-with-multiple-steps
+tkn tr ls
+tkn tr logs -f --last
+```
+
+The expected output
+<pre>
+(jegan@tektutor.org)$ oc apply -f task.yml 
+task.tekton.dev/task-with-multiple-steps created
+(jegan@tektutor.org)$ tkn t ls
+NAME                              DESCRIPTION   AGE
+hello-task-with-multiple-params                 8 minutes ago
+task-with-multiple-steps                        4 seconds ago
+(jegan@tektutor.org)$ tkn tr ls
+NAME                      STARTED         DURATION   STATUS
+taskrun-multiple-params   8 minutes ago   10s        Succeeded
+(jegan@tektutor.org)$ tkn t start task-with-multiple-steps
+TaskRun started: task-with-multiple-steps-run-mcfn4
+
+In order to track the TaskRun progress run:
+tkn taskrun logs task-with-multiple-steps-run-mcfn4 -f -n jegan
+
+(jegan@tektutor.org)$ tkn tr logs -f --last
+[step-1] Step 1 => Hello TekTon !
+
+[step-2] Step 2 => Hello TekTon !
+
+[step-3] Step 3 => Hello TekTon !
+</pre>
+
