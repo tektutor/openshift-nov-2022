@@ -100,3 +100,95 @@ oc apply -f pod.yml
 oc get po -w
 oc logs my-pod
 ```
+
+## Lab - Creating your first Tekton Task
+
+Create a file named task.yml with below content
+```
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello
+spec:
+  steps:
+  - name: echo
+    image: ubuntu
+    command: 
+    - echo
+    args:
+    - "Hello Tekton !"
+```
+
+Running your first Tekton task
+```
+oc apply -f task.yml
+tkn task ls
+tkn task start hello
+tkn taskrun logs --last
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc apply -f task.yml 
+task.tekton.dev/hello created
+(jegan@tektutor.org)$ oc get tasks
+NAME    AGE
+hello   4s
+(jegan@tektutor.org)$ oc get task
+NAME    AGE
+hello   5s
+(jegan@tektutor.org)$ tkn tasks list
+NAME    DESCRIPTION   AGE
+hello                 13 seconds ago
+(jegan@tektutor.org)$ tkn tasks ls
+NAME    DESCRIPTION   AGE
+hello                 16 seconds ago
+(jegan@tektutor.org)$ oc describe task/hello
+Name:         hello
+Namespace:    jegan
+Labels:       <none>
+Annotations:  <none>
+API Version:  tekton.dev/v1beta1
+Kind:         Task
+Metadata:
+  Creation Timestamp:  2022-11-15T06:06:52Z
+  Generation:          1
+  Managed Fields:
+    API Version:  tekton.dev/v1beta1
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .:
+          f:kubectl.kubernetes.io/last-applied-configuration:
+      f:spec:
+        .:
+        f:steps:
+    Manager:         kubectl-client-side-apply
+    Operation:       Update
+    Time:            2022-11-15T06:06:52Z
+  Resource Version:  4638609
+  UID:               922a259d-709f-43be-aebf-4409a59cf34a
+Spec:
+  Steps:
+    Args:
+      Hello Tekton !
+    Command:
+      echo
+    Image:  ubuntu
+    Name:   echo
+    Resources:
+Events:  <none>
+(jegan@tektutor.org)$ tkn tkn ls
+Error: command tkn tkn doesn't exist. Run tkn help for available commands
+(jegan@tektutor.org)$ tkn task ls
+NAME    DESCRIPTION   AGE
+hello                 44 seconds ago
+(jegan@tektutor.org)$ tkn task start hello
+TaskRun started: hello-run-bwpmn
+
+In order to track the TaskRun progress run:
+tkn taskrun logs hello-run-bwpmn -f -n jegan
+(jegan@tektutor.org)$ tkn taskrun logs hello-run-bwpmn -f -n jegan
+[echo] Hello Tekton !
+</pre>
