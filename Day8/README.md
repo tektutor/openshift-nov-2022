@@ -81,3 +81,27 @@ taskrun.tekton.dev/taskrun-with-pv-ng7ng created
 
 [print-path] /my/myworkspace
 </pre>
+
+## Using emptydir to share data between steps within the same Task
+EmptyDir is a temp directory(volume) created on the Task level(i.e Pod).
+All the containers running within the same Pod can access the emptyDir volume.
+
+```
+cd ~/openshift-nov-2022
+git pull
+cd Day8/task-with-emptydir
+
+oc create -f taskrun.yml
+tkn tr list
+tkn tr logs -f --last
+```
+
+Expected output
+<pre>
+jegan@tektutor.org)$ <b>oc create -f taskrun.yml</b>
+taskrun.tekton.dev/taskrun-with-emptydir-w8dxt created
+
+(jegan@tektutor.org)$ <b>tkn tr logs -f --last</b>
+
+[step-2] Created by step-1
+</pre>
