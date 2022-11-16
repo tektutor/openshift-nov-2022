@@ -73,7 +73,6 @@ taskrun-with-configmap-xbg4w   1 hour ago       9s         Failed
 taskrun-with-configmap-8gknj   1 hour ago       15s        Succeeded
 taskrun-with-configmap-2nxbc   2 hours ago      20s        Succeeded
 
-(jegan@tektutor.org)$ vim taskrun.yml 
 (jegan@tektutor.org)$ oc create -f taskrun.yml 
 taskrun.tekton.dev/taskrun-with-pv-ng7ng created
 
