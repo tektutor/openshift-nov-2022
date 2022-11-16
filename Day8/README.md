@@ -1,10 +1,10 @@
-## Creating configmap from file and from-literal
+## ⛹️‍♂️ Lab - Creating configmap from file and from-literal
 ```
 oc create configmap my-configmap1 --from-literal=jdk_path=/usr/lib/java --from-literal=m2_path=/usr/share/maven
 oc create configmap my-configmap2 --from-file=./app.properties
 ```
 
-## Creating a TaskRun that maps ConfigMap values in a Workspace directory as files
+## ⛹️‍♂️ Lab - Creating a TaskRun that maps ConfigMap values in a Workspace directory as files
 ```
 cd ~/openshift-nov-2022
 git pull
@@ -16,7 +16,7 @@ tkn tr ls
 tkn tr logs -f --last
 ```
 
-## Creating a TaskRun that maps Secrets values in a Workspace directory as files
+## ⛹️‍♂️ Lab - Creating a TaskRun that maps Secrets values in a Workspace directory as files
 ```
 cd ~/openshift-nov-2022
 git pull
@@ -28,7 +28,7 @@ tkn tr ls
 tkn tr logs -f --last
 ```
 
-## TekTon Task that uses Persistent volumes
+## ⛹️‍♂️ Lab - TekTon Task that uses Persistent volumes
 ```
 cd ~/openshift-nov-2022
 git pull
