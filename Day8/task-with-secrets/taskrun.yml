@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: taskrun-with-secrets-
+spec:
+  workspaces:
+  - name: credentials 
+    Secret:
+      secretName: login-credentials 
+      items:
+      - key: username 
+        path: user 
+      - key: password 
+        path: pass 
+  taskSpec:
+    steps:
+    - name: read-tools-path-from-cm
+      image: ubuntu
+      script: |
+        cat $(workspaces.credentials.path)/user
+        cat $(workspaces.credentials.path)/pass
+        ls -lha /my/secrets
+    workspaces:
+    - name: credentials 
+      mountPath: /my/secrets

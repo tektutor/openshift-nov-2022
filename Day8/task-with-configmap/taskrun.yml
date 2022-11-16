@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: taskrun-with-configmap-
+spec:
+  workspaces:
+  - name: env-settings
+    configMap:
+      name: tools-path-cm
+      items:
+      - key: jdk_home
+        path: java
+      - key: m2_home
+        path: maven
+  taskSpec:
+    steps:
+    - name: read-tools-path-from-cm
+      image: ubuntu
+      script: |
+        cat $(workspaces.env-settings.path)/java
+        cat $(workspaces.env-settings.path)/maven
+        ls -lha /my/configmap
+    workspaces:
+    - name: env-settings
+      mountPath: /my/configmap

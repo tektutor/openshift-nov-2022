@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tools-path-cm
+data:
+  jdk_home: /usr/lib/jdk11
+  m2_home: /usr/share/maven
