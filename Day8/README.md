@@ -35,7 +35,12 @@ BinaryData
 Events:  <none>
 </pre>
 
-## Task with ConfigMap mounted as a volume
+## Lab - Creating ConfigMap from command-line with inline values
+```
+oc create configmap my-config-map --from-literal=orchestration=openshift --from-literal=container=crio
+```
+
+## Lab - Task with ConfigMap mounted as a volume
 
 First create a configmap with bunch of key/value pairs
 configmap.yml
