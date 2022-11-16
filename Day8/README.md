@@ -26,7 +26,7 @@ oc apply -f secrets.yml
 oc create -f taskrun.yml
 tkn tr ls
 tkn tr logs -f --last
-``
+```
 
 ## TekTon Task that uses Persistent volumes
 ```
