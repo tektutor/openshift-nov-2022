@@ -105,3 +105,49 @@ taskrun.tekton.dev/taskrun-with-emptydir-w8dxt created
 
 [step-2] Created by step-1
 </pre>
+
+## ⛹️‍♂️ Lab - Creating your first Tekton pipeline
+```
+cd ~/openshift-nov-2022
+git pull
+
+cd Day8/pipelines
+oc apply -f first-pipeline.yml
+oc get pipelines
+tkn pipelines ls
+tkn pipeline start first-pipeline --show-log
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc apply -f first-pipeline.yml 
+task.tekton.dev/task1 configured
+task.tekton.dev/task2 configured
+pipeline.tekton.dev/first-pipeline created
+
+(jegan@tektutor.org)$ oc get pipelines
+NAME             AGE
+first-pipeline   20s
+(jegan@tektutor.org)$ tkn pipelines list
+NAME             AGE              LAST RUN                   STARTED         DURATION   STATUS
+first-pipeline   27 seconds ago   first-pipeline-run-94qsm   2 minutes ago   32s        Succeeded
+(jegan@tektutor.org)$ tkn pipelines ls
+NAME             AGE              LAST RUN                   STARTED         DURATION   STATUS
+first-pipeline   29 seconds ago   first-pipeline-run-94qsm   2 minutes ago   32s        Succeeded
+(jegan@tektutor.org)$ tkn p ls
+NAME             AGE              LAST RUN                   STARTED         DURATION   STATUS
+first-pipeline   33 seconds ago   first-pipeline-run-94qsm   2 minutes ago   32s        Succeeded
+
+jegan@tektutor.org)$ tkn pipeline start first-pipeline --showlog
+PipelineRun started: first-pipeline-run-94qsm
+Waiting for logs to be available...
+[pipeline-task1 : step-1] Task1 - Step1
+
+[pipeline-task1 : step-2] Task1 - Step2
+
+[pipeline-task2 : step-1] Task2 - Step1
+
+[pipeline-task2 : step-2] Task2 - Step2
+
+[pipeline-task2 : step-3] Task2 - Step3
+</pre>
