@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: taskrun-with-pv-
+spec:
+  workspaces:
+  - name: myworkspace
+    persistentVolumeClaim:
+      claimName: tekton-pvc-jegan # Replace 'jegan' with your name
+  taskSpec:
+    steps:
+    - name: task-with-pv
+      image: ubuntu
+      script: |
+        echo $(workspaces.myworkspace.path) > $(workspaces.myworkspace.path)/path.txt
+        echo "Stored the workspace path in a file named path.txt"
+
+    - name: print-path
+      image: ubuntu
+      script: cat $(workspaces.myworkspace.path)/path.txt
+    workspaces:
+    - name: myworkspace
+      mountPath: /my/myworkspace
+

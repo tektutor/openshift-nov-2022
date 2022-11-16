@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tekton-pv-jegan  # Replace 'jegan' with your name
+  labels:
+    name: jegan # Replace 'jegan' with your name
+spec:
+  capacity:
+    storage: 5Mi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /mnt/tekton # Replace this path with /mnt/<your-centos-login>, eg: /mnt/user1, /mnt/user2
+    server: 192.168.1.80 # Replace this IP with 192.168.1.206 or 192.168.1.207 depending on which server you are connected
