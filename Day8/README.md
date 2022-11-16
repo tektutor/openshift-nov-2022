@@ -115,7 +115,7 @@ cd Day8/pipelines
 oc apply -f first-pipeline.yml
 oc get pipelines
 tkn pipelines ls
-tkn pipeline start first-pipeline --show-log
+tkn pipeline start first-pipeline --showlog
 ```
 
 Expected output
