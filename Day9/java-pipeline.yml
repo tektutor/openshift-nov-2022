@@ -104,18 +104,18 @@ spec:
         - name: maven-settings
           workspace: maven-repo
 # Task that installs the packaged binaries into your local maven repository
-    - name: build-image 
-      runAfter:
-        - package
-      taskRef:
-        kind: ClusterTask
-        name: buildah 
-      params:
-      - name: IMAGE
-        value: spring-ms
-      workspaces:
-        - name: source
-          workspace: source-code
+#    - name: build-image 
+#      runAfter:
+#        - package
+#      taskRef:
+#        kind: ClusterTask
+#        name: buildah 
+#      params:
+#      - name: IMAGE
+#        value: spring-ms
+#      workspaces:
+#        - name: source
+#          workspace: source-code
   workspaces:
     - name: source-code
     - name: maven-repo
