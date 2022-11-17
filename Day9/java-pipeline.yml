@@ -1,0 +1,141 @@
+# Create a PersistentVolume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tekton-pv-jegan 
+  labels:
+    name: jegan
+spec:
+  capacity: 
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    server: 192.168.1.80
+    path: "/mnt/pv1"
+---
+# Create a PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tekton-pvc-jegan
+spec:
+  selector:
+    matchLabels:
+      name: jegan
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+---
+# Create a pipeline
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: java-cicd-pipeline
+spec:
+  tasks:
+    - name: clone-git-repo
+      params:
+        - name: url
+          value: 'https://github.com/tektutor/spring-ms.git'
+# This is the git branch that you wish you clone
+        - name: revision
+          value: master
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+        
+      workspaces:
+        - name: output
+          workspace: source-code
+# Task that compiles your maven project
+    - name: compile
+      params:
+       - name: GOALS
+         value:
+            - -Dmaven.repo.local=$(workspaces.maven-settings.path)
+            - compile
+      runAfter:
+        - clone-git-repo
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source-code
+        - name: maven-settings
+          workspace: maven-repo
+# Task that performs unit-test on your maven project
+    - name: test
+      params:
+       - name: GOALS
+         value:
+            - -Dmaven.repo.local=$(workspaces.maven-settings.path)
+            - test
+      runAfter:
+        - compile
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source-code
+        - name: maven-settings
+          workspace: maven-repo
+# Task that packages your unit-tested maven project
+    - name: package
+      params:
+        - name: GOALS
+          value:
+            - -Dmaven.repo.local=$(workspaces.maven-settings.path)
+            - package
+      runAfter:
+        - test
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source-code
+        - name: maven-settings
+          workspace: maven-repo
+# Task that installs the packaged binaries into your local maven repository
+    - name: build-image 
+      runAfter:
+        - package
+      taskRef:
+        kind: ClusterTask
+        name: buildah 
+      params:
+      - name: IMAGE
+        value: spring-ms
+      workspaces:
+        - name: source
+          workspace: source-code
+  workspaces:
+    - name: source-code
+    - name: maven-repo
+---
+
+# PipelineRun
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: java-cicd-pipeline-run
+spec:
+  pipelineRef:
+    name: java-cicd-pipeline
+  serviceAccountName: pipeline 
+  workspaces:
+    - name: source-code
+      persistentVolumeClaim:
+        claimName: tekton-pvc-jegan
+      subPath: source
+    - name: maven-repo
+      persistentVolumeClaim:
+        claimName: tekton-pvc-jegan
+      subPath: m2

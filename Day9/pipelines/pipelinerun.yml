@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: second-pipelinerun-
+spec:
+  pipelineRef: 
+    name: second-pipeline 
+  params:
+  - name: applnName
+    value: 'second-pipeline'

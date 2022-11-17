@@ -6,8 +6,14 @@ spec:
   params:
   - name: message1
     type: string
+    description: 'This is a string message'
+    default: 'Hello'
+
   - name: message2
     type: string 
+    description: 'This is a string message'
+    default: 'World !'
+
   steps:
   - name: step1
     image: ubuntu

@@ -1,14 +1,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: taskrun-multiple-params
+  generateName: taskrun-multiple-params
 spec:
-
   taskRef: 
     name: hello-task-with-multiple-params 
     kind: Task
-  params: 
-  - name: message1
-    value: "Hello"
-  - name: message2
-    value: "World !"
+#  params: 
+#  - name: message1
+#    value: "Hello"
+#  - name: message2
+#    value: "World !"

@@ -1,0 +1,139 @@
+# Define Task 1 
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-1
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: echo $(params.applnName)
+---
+# Define Task 2 
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-2
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: echo $(params.applnName)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-3
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: | 
+      echo $(params.applnName)
+      echo "Task 3 - Step 1" 
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-4
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: echo $(params.applnName)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-5
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: |
+      echo $(params.applnName)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task-6
+spec:
+  params:
+  - name: applnName
+    type: string
+    default: 'Second Pipeline'
+  steps:
+  - name : step-1 
+    image: registry.redhat.io/ubi7/ubi-minimal
+    script: |
+      echo $(params.applnName)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: second-pipeline
+spec:
+  params:
+  - name: applnName
+    type: string
+  tasks:
+    - name: pipeline-task-1
+      taskRef:
+        kind: Task
+        name: task-1
+        
+    - name: pipeline-task-2
+      runAfter:
+        - pipeline-task-1
+      taskRef:
+        kind: Task
+        name: task-2
+        
+    - name: pipeline-task-3
+      runAfter:
+        - pipeline-task-1
+      taskRef:
+        kind: Task
+        name: task-3
+        
+    - name: pipeline-task-4
+      runAfter:
+        - pipeline-task-2
+        - pipeline-task-3
+      taskRef:
+        kind: Task
+        name: task-4
+        
+    - name: pipeline-task-5
+      runAfter:
+        - pipeline-task-4
+      taskRef:
+        kind: Task
+        name: task-5
+        
+    - name: pipeline-task-6
+      runAfter:
+        - pipeline-task-5
+      taskRef:
+        kind: Task
+        name: task-6
