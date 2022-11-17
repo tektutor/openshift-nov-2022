@@ -46,7 +46,7 @@ pipelinerun.tekton.dev/second-pipelinerun-4gd9q created
 [pipeline-task-6 : step-1] Second Pipeline
 </pre>
 
-## Lab - Running Java application CI/CD Tekton Pipeline
+## ⛹️‍♂️ Lab - Running Java application CI/CD Tekton Pipeline
 ```
 cd ~/openshift-nov-2022
 git pull
