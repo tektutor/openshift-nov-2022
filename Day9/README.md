@@ -45,3 +45,17 @@ pipelinerun.tekton.dev/second-pipelinerun-4gd9q created
 
 [pipeline-task-6 : step-1] Second Pipeline
 </pre>
+
+## Lab - Running Java application CI/CD Tekton Pipeline
+```
+cd ~/openshift-nov-2022
+git pull
+
+cd Day9
+
+oc apply -f java-pipeline.yml
+tkn pipeline ls
+tkn pipeline start java-cicd-pipeline
+tkn pr ls
+tkn pr logs -f --last
+```
