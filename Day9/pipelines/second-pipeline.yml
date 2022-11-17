@@ -7,7 +7,7 @@ spec:
   params:
   - name: applnName
     type: string
-    default: 'Second Pipeline'
+#    default: 'Second Pipeline'
   steps:
   - name : step-1 
     image: registry.redhat.io/ubi7/ubi-minimal
@@ -101,7 +101,9 @@ spec:
       taskRef:
         kind: Task
         name: task-1
-        
+      params:
+      - name: applnName
+        value: $(params.applnName)  
     - name: pipeline-task-2
       runAfter:
         - pipeline-task-1
@@ -115,6 +117,9 @@ spec:
       taskRef:
         kind: Task
         name: task-3
+      params:
+      - name: applnName
+        value: $(params.applnName)  
         
     - name: pipeline-task-4
       runAfter:
@@ -123,6 +128,9 @@ spec:
       taskRef:
         kind: Task
         name: task-4
+      params:
+      - name: applnName
+        value: $(params.applnName)  
         
     - name: pipeline-task-5
       runAfter:
@@ -130,6 +138,9 @@ spec:
       taskRef:
         kind: Task
         name: task-5
+      params:
+      - name: applnName
+        value: $(params.applnName)  
         
     - name: pipeline-task-6
       runAfter:
@@ -137,3 +148,6 @@ spec:
       taskRef:
         kind: Task
         name: task-6
+      params:
+      - name: applnName
+        value: $(params.applnName)  

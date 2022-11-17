@@ -3,8 +3,8 @@ kind: PipelineRun
 metadata:
   generateName: second-pipelinerun-
 spec:
-  pipelineRef: 
-    name: second-pipeline 
   params:
   - name: applnName
-    value: 'second-pipeline'
+    value: "Value reassigned from pipelinerun second-pipeline"
+  pipelineRef: 
+    name: second-pipeline 
