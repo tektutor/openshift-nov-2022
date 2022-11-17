@@ -4,3 +4,4 @@
 <pre>
 https://developers.redhat.com/courses/foundations/getting-started
 </pre>
+If the cluster is left idle it will destroy the cluster.
