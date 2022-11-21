@@ -63,3 +63,12 @@ Expected outupt
 (jegan@tektutor.org)$ <b>oc adm policy add-scc-to-user privileged -z fsgroup-runasany</b>
 clusterrole.rbac.authorization.k8s.io/system:openshift:scc:privileged added: "fsgroup-runasany"
 </pre>
+
+
+## Lab - Triggering Tekton Pipeline using polling
+
+Let's install Tekton polling operator
+```
+oc apply -f https://github.com/bigkevmcd/tekton-polling-operator/releases/download/v0.4.0/release-v0.4.0.yaml
+```
+
